@@ -151,14 +151,14 @@ function Landing(props) {
                             JsxRuntime.jsx("div", {
                                   children: JsxRuntime.jsx("button", {
                                         children: "Book Reservation",
-                                        className: "mx-auto mt-4 bg-slate-500 hover:bg-slate-700 text-white py-2 px-4 rounded"
+                                        className: "mx-auto mt-4 bg-slate-500 hover:bg-slate-700 text-white py-2 px-4 rounded-sm"
                                       }),
                                   className: "w-full"
                                 })
                           ],
-                          className: "bg-zinc-100 rounded px-4 py-4"
+                          className: "bg-zinc-100 rounded-sm px-4 py-4"
                         }),
-                    className: "w-full rounded shadow-lg p-4"
+                    className: "w-full rounded-sm shadow-lg p-4"
                   }),
               className: "justify-center flex items-center"
             });

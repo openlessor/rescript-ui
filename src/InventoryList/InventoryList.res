@@ -37,8 +37,8 @@ let make = (~openDate, ~closeDate, ~activeId: option<string>, ~items: array<Exec
       <span className="m-2 align-middle text-3xl font-light">
         <i className="light-icon-search" />
       </span>
-      {"Available equipment" |> str}
-      <span className="m-4 text-gray-500 text-lg shadow-lg">{heading |> str}</span>
+      {"Available equipment" -> str}
+      <span className="m-4 text-gray-500 text-lg shadow-lg">{heading -> str}</span>
     </h1>
     <div className="place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4">
       {Js.Array.map((item: ExecutorHook.InventoryItem.t) =>
@@ -47,7 +47,7 @@ let make = (~openDate, ~closeDate, ~activeId: option<string>, ~items: array<Exec
           item={item}
           active={activeId == Some(Belt.Int.toString(item.id))}
         />,
-        items) |> React.array}
+        items) -> React.array}
     </div>
   </div>
 }
