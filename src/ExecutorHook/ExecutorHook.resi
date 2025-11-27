@@ -9,9 +9,7 @@ module InventoryItem: {
 }
 
 module ExecutorConfig: {
-  type t = {
-    inventory: array<InventoryItem.t>,
-  }
+  type t = {inventory: array<InventoryItem.t>}
 }
 
 type state =

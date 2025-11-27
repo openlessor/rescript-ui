@@ -4,6 +4,7 @@ import * as Cart from "../Cart/Cart.res.mjs";
 import * as React from "react";
 import * as Caml_obj from "rescript/lib/es6/caml_obj.js";
 import * as Js_array from "rescript/lib/es6/js_array.js";
+import * as Core__List from "@rescript/core/src/Core__List.res.mjs";
 import * as JsxRuntime from "react/jsx-runtime";
 import * as RescriptReactRouter from "@rescript/react/src/RescriptReactRouter.res.mjs";
 
@@ -16,6 +17,7 @@ function InventoryItem(props) {
   var id = item.id;
   React.useContext(Cart.DispatchContext.context);
   var cartState = React.useContext(Cart.StateContext.context);
+  var match = RescriptReactRouter.useUrl(undefined, undefined);
   var matches = Js_array.filter((function (cart_item) {
           return cart_item === item.id;
         }), cartState.cart);
@@ -33,7 +35,7 @@ function InventoryItem(props) {
                                   },
                                   src: "https://placeholdr.ai/1ca27004-f6f9-413a-8dbf-6c088feabead/256/256"
                                 }),
-                            className: "rounded border-2 shadow m-0 p-0"
+                            className: "rounded-sm border-2 shadow-sm m-0 p-0"
                           }),
                       JsxRuntime.jsxs("div", {
                             children: [
@@ -48,7 +50,7 @@ function InventoryItem(props) {
                                             title: "Quantity in cart"
                                           })
                                     ],
-                                    className: "drop-shadow"
+                                    className: "drop-shadow-sm"
                                   }),
                               JsxRuntime.jsxs("span", {
                                     children: [
@@ -61,16 +63,16 @@ function InventoryItem(props) {
                                             title: "Quantity available"
                                           })
                                     ],
-                                    className: "drop-shadow"
+                                    className: "drop-shadow-sm"
                                   })
                             ],
-                            className: "flex flex-row justify-between w-full bg-gray-300 text-white shadow"
+                            className: "flex flex-row justify-between w-full bg-gray-300 text-white shadow-sm"
                           }),
                       JsxRuntime.jsxs("div", {
                             children: [
                               JsxRuntime.jsx("h2", {
                                     children: item.title,
-                                    className: "w-full text-xs drop-shadow text-gray-500"
+                                    className: "w-full text-xs drop-shadow-sm text-gray-500"
                                   }),
                               JsxRuntime.jsx("p", {
                                     children: item.description,
@@ -79,15 +81,16 @@ function InventoryItem(props) {
                                     ) + "text-xs m-2"
                                   })
                             ],
-                            className: "flex flex-col text-align-center w-full bg-white text-gray-300 rounded m-[1.5] justify-self-end"
+                            className: "flex flex-col text-align-center w-full bg-white text-gray-300 rounded-sm m-[1.5] justify-self-end"
                           })
                     ],
-                    className: "relative m-[1.5] flex flex-col block"
+                    className: "relative m-[1.5] flex flex-col"
                   }),
-              className: "active:col-span-4 target:col-span-4 lg:active:col-span-8 lg:target:col-span-8 block",
+              className: Caml_obj.equal(Core__List.get(match.path, 1), String(id)) ? "col-span-4 lg:col-span-8" : " block",
               id: "item-" + String(id),
-              href: "#",
-              onClick: (function (_e) {
+              href: "/item/" + String(id),
+              onClick: (function (e) {
+                  e.preventDefault();
                   RescriptReactRouter.replace("/item/" + String(id));
                 })
             });

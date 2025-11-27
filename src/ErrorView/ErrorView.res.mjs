@@ -8,14 +8,14 @@ function str(prim) {
 
 function ErrorView(props) {
   return JsxRuntime.jsx("h1", {
-              children: "Error"
-            });
+    children: "Error"
+  });
 }
 
-var make = ErrorView;
+let make = ErrorView;
 
 export {
-  str ,
-  make ,
+  str,
+  make,
 }
 /* react/jsx-runtime Not a pure module */

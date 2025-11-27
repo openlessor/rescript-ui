@@ -4,7 +4,4 @@
 require("react-datepicker/dist/react-datepicker.css")
 ;
 
-export {
-  
-}
 /*  Not a pure module */

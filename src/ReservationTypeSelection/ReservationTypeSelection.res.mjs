@@ -8,54 +8,54 @@ function str(prim) {
 
 function ReservationTypeSelection(props) {
   return JsxRuntime.jsxs("div", {
-              children: [
-                JsxRuntime.jsx("div", {
-                      children: JsxRuntime.jsxs("label", {
-                            children: [
-                              JsxRuntime.jsx("input", {
-                                    className: "m-1",
-                                    id: "type_hour",
-                                    name: "type",
-                                    type: "radio",
-                                    value: "hour"
-                                  }),
-                              JsxRuntime.jsx("span", {
-                                    children: " Hourly",
-                                    className: "p-1 pl-0"
-                                  })
-                            ],
-                            htmlFor: "type_hour"
-                          }),
-                      className: "inline-block"
-                    }),
-                JsxRuntime.jsx("div", {
-                      children: JsxRuntime.jsxs("label", {
-                            children: [
-                              JsxRuntime.jsx("input", {
-                                    className: "m-1",
-                                    id: "type_date",
-                                    name: "type",
-                                    type: "radio",
-                                    value: "date"
-                                  }),
-                              JsxRuntime.jsx("span", {
-                                    children: " Until specified date",
-                                    className: "p-1 pl-0"
-                                  })
-                            ],
-                            htmlFor: "type_date"
-                          }),
-                      className: "inline-block"
-                    })
-              ],
-              className: "ml-10"
-            });
+    children: [
+      JsxRuntime.jsx("div", {
+        children: JsxRuntime.jsxs("label", {
+          children: [
+            JsxRuntime.jsx("input", {
+              className: "m-1",
+              id: "type_hour",
+              name: "type",
+              type: "radio",
+              value: "hour"
+            }),
+            JsxRuntime.jsx("span", {
+              children: " Hourly",
+              className: "p-1 pl-0"
+            })
+          ],
+          htmlFor: "type_hour"
+        }),
+        className: "inline-block"
+      }),
+      JsxRuntime.jsx("div", {
+        children: JsxRuntime.jsxs("label", {
+          children: [
+            JsxRuntime.jsx("input", {
+              className: "m-1",
+              id: "type_date",
+              name: "type",
+              type: "radio",
+              value: "date"
+            }),
+            JsxRuntime.jsx("span", {
+              children: " Until specified date",
+              className: "p-1 pl-0"
+            })
+          ],
+          htmlFor: "type_date"
+        }),
+        className: "inline-block"
+      })
+    ],
+    className: "ml-10"
+  });
 }
 
-var make = ReservationTypeSelection;
+let make = ReservationTypeSelection;
 
 export {
-  str ,
-  make ,
+  str,
+  make,
 }
 /* react/jsx-runtime Not a pure module */

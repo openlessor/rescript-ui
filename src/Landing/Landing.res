@@ -44,26 +44,26 @@ let make = (~dateA = ?, ~dateB = ?, ~activeId: option<string>) => {
     Js.Console.log({"ConfigState": configState})
 
     ( <div className="justify-center flex items-center">
-        <div className="w-full rounded shadow-lg p-4">
-            <div className="bg-zinc-100 rounded px-4 py-4">
+        <div className="w-full rounded-sm shadow-lg p-4">
+            <div className="bg-zinc-100 rounded-sm px-4 py-4">
                 <div className="align-middle font-bold text-3xl m-2 text-zinc-700">
                     <span className="m-2 align-middle text-3xl font-light">
                         <i className="light-icon-cloud"></i>
                     </span>
-                {"Cloud Hardware Rental" |> str}
+                {"Cloud Hardware Rental" -> str}
                 </div>
                 <div className="align-middle text-gray-700 text-base m-2">
                     <span className="m-2 align-middle text-3xl font-light">
                         <i className="light-icon-calendar"></i>
-                    </span> 
-                    {"Select your reservation start date: " |> str}
+                    </span>
+                    {"Select your reservation start date: " -> str}
                 </div>
                 <DatePicker minDate={today} onChange={updateDate} isOpen={false} className="m-2 ml-14 block" calendarClassName="bg-white" selected={openDate} />
                 <div className="align-middle text-gray-700 text-base m-2">
                     <span className="m-2 align-middle text-3xl font-light">
                         <i className="light-icon-file-invoice"></i>
                     </span>
-                    {"Select your reservation type: " |> str}
+                    {"Select your reservation type: " -> str}
                     <ReservationTypeSelection />
                 </div>
                 <Cart.StateContext.Provider value={state}>
@@ -73,7 +73,7 @@ let make = (~dateA = ?, ~dateB = ?, ~activeId: option<string>) => {
                     </Cart.DispatchContext.Provider>
                 </Cart.StateContext.Provider>
                 <div className="w-full">
-                    <button className="mx-auto mt-4 bg-slate-500 hover:bg-slate-700 text-white py-2 px-4 rounded">{"Book Reservation" |> str}</button>
+                    <button className="mx-auto mt-4 bg-slate-500 hover:bg-slate-700 text-white py-2 px-4 rounded-sm">{"Book Reservation" -> str}</button>
                 </div>
             </div>
         </div>

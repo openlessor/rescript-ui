@@ -8,14 +8,14 @@ function str(prim) {
 
 function $$Error(props) {
   return JsxRuntime.jsx("h1", {
-              children: "Error"
-            });
+    children: "Error"
+  });
 }
 
-var make = $$Error;
+let make = $$Error;
 
 export {
-  str ,
-  make ,
+  str,
+  make,
 }
 /* react/jsx-runtime Not a pure module */
