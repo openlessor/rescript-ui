@@ -27,9 +27,10 @@ let fetchExecutorConfig = async () => {
   let response = await fetch(endpoint_url, {method: #GET})
   ExecutorConfig.parseJSON(await response->Response.text)
 }
-let executorConfig = source(LoadingEndpoint, async (_previous, set) => {
+let empty: ExecutorConfig.t = {inventory: []}
+let executorConfig = source(async set => {
   set(await fetchExecutorConfig())
-})
+}, empty)
 
 let useExecutor = (): ExecutorConfig.t => {
   useTilia()

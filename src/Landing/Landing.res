@@ -50,7 +50,6 @@ let make = leaf((~dateA=?, ~dateB=?, ~activeId: option<string>) => {
   let cartCount = Belt.Array.length(state.cart)
 
   let configState: ExecutorHook.ExecutorConfig.t = ExecutorHook.useExecutor()
-  Js.Console.log({"ConfigState": JSON.stringify(configState)})
 
   <div className="justify-center flex items-center">
     <div className="w-full rounded-sm shadow-lg p-4">
