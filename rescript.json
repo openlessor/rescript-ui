@@ -16,8 +16,9 @@
     "@rescript/core",
     "@rescript/react",
     "@fattafatta/rescript-jotai",
-    "@glennsl/rescript-fetch"
+    "@glennsl/rescript-fetch",
+    "tilia"
   ],
   "bs-dev-dependencies": [],
-  "bsc-flags": ["-open RescriptCore"]
+  "bsc-flags": ["-open RescriptCore", "-open Tilia"]
 }
