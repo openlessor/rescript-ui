@@ -14,7 +14,7 @@ let removeFromCart = (state: Cart.t, id) => {
 }
 
 @react.component
-let make = leaf((~dateA=?, ~dateB=?, ~activeId: option<string>) => {
+let make = (~dateA=?, ~dateB=?, ~activeId: option<string>) => {
   let now = Js.Date.make()
   let today = Js.Date.fromFloat(
     Js.Date.setHoursMSMs(now, ~hours=0.0, ~minutes=0.0, ~seconds=0.0, ~milliseconds=0.0, ()),
@@ -50,7 +50,7 @@ let make = leaf((~dateA=?, ~dateB=?, ~activeId: option<string>) => {
   let cartCount = Belt.Array.length(state.cart)
 
   let configState: ExecutorHook.ExecutorConfig.t = ExecutorHook.useExecutor()
-  observe(() => Js.Console.log(configState))
+  Js.Console.log(configState.inventory)
 
   <div className="justify-center flex items-center">
     <div className="w-full rounded-sm shadow-lg p-4">
@@ -102,4 +102,4 @@ let make = leaf((~dateA=?, ~dateB=?, ~activeId: option<string>) => {
       </div>
     </div>
   </div>
-})
+}

@@ -1,13 +1,17 @@
 let str = React.string
 
-type rec t = {cart: array<int>, selected_item: option<int>, items: array<ExecutorHook.InventoryItem.t>}
+type rec t = {
+  cart: array<int>,
+  selected_item: option<int>,
+  items: array<ExecutorHook.InventoryItem.t>,
+}
 
-let itemCount = (state) => {
+let itemCount = state => {
   Belt.Array.length(state)
 }
 
 module DispatchContext = {
-  type action = AddToCart({ id:int }) | RemoveFromCart({ id:int })
+  type action = AddToCart({id: int}) | RemoveFromCart({id: int})
 
   let context = React.createContext((_action: action) => ())
 
@@ -16,9 +20,9 @@ module DispatchContext = {
 
     @react.component
     let make = (~children, ~value) => {
-        let element: React.element = React.createElement(provider, {value: value, children: children})
-        element
-    } 
+      let element: React.element = React.createElement(provider, {value, children})
+      element
+    }
   }
 }
 
@@ -31,24 +35,24 @@ module StateContext = {
 
     @react.component
     let make = (~children, ~value: t) => {
-        let element: React.element = React.createElement(provider, {value: value, children: children})
-        element
-    } 
+      let element: React.element = React.createElement(provider, {value, children})
+      element
+    }
   }
 }
 
 @react.component
 let make = (~_items, ~count) => {
-    let cartState = React.useContext(StateContext.context)
-    let _dispatch = React.useContext(DispatchContext.context)
-    Js.Console.log({"CartState": cartState})
-    
-    <h1 className="block font-bold align-middle text-gray-700 text-base m-2 text-3xl">
-      <span className="m-2 align-middle text-3xl font-light">
-          <i className="light-icon-shopping-cart"></i>
-      </span>
-      {str("Selected equipment (")}
-      {str(Belt.Int.toString(count))}
-      {str(")")}
-    </h1>
+  let cartState = React.useContext(StateContext.context)
+  let _dispatch = React.useContext(DispatchContext.context)
+  Js.Console.log({"CartState": cartState})
+
+  <h1 className="block font-bold align-middle text-gray-700 text-base m-2 text-3xl">
+    <span className="m-2 align-middle text-3xl font-light">
+      <i className="light-icon-shopping-cart" />
+    </span>
+    {str("Selected equipment (")}
+    {str(Belt.Int.toString(count))}
+    {str(")")}
+  </h1>
 }
