@@ -28,11 +28,12 @@ let fetchExecutorConfig = async () => {
   ExecutorConfig.parseJSON(await response->Response.text)
 }
 let empty: ExecutorConfig.t = {inventory: []}
-let executorConfig = source(async set => {
-  set(await fetchExecutorConfig())
-}, empty)
+let executorConfig = source(empty, async (_prev, set) => {
+  let config = await fetchExecutorConfig()
+  set(config)
+})
 
 let useExecutor = (): ExecutorConfig.t => {
-  useTilia()
+  //useTilia()
   executorConfig
 }

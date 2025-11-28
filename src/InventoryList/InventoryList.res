@@ -1,19 +1,26 @@
 let str = React.string
 
-module IntCmp =
-  Belt.Id.MakeComparable({
-    type t = int
-    let cmp = Pervasives.compare
-  })
+module IntCmp = Belt.Id.MakeComparable({
+  type t = int
+  let cmp = Pervasives.compare
+})
 
 @react.component
-let make = (~openDate, ~closeDate, ~activeId: option<string>, ~items: array<ExecutorHook.InventoryItem.t>) => {
-  Js.Console.log({"InventoryList Props": {
-    "openDate": Js.Date.toISOString(openDate),
-    "closeDate": Js.Date.toISOString(closeDate),
-    "activeId": activeId,
-    "itemsLength": Belt.Array.length(items),
-  }})
+let make = (
+  ~openDate,
+  ~closeDate,
+  ~activeId: option<string>,
+  ~items: array<ExecutorHook.InventoryItem.t>,
+) => {
+  Js.Console.log({
+    "InventoryList Props": {
+      "openDate": Js.Date.toISOString(openDate),
+      "closeDate": Js.Date.toISOString(closeDate),
+      "activeId": activeId,
+      "items": items,
+      //"itemsLength": Belt.Array.length(items),
+    },
+  })
   let filterType = "all"
   let now = Js.Date.make()
   let today = Js.Date.fromFloat(
@@ -28,7 +35,12 @@ let make = (~openDate, ~closeDate, ~activeId: option<string>, ~items: array<Exec
       "Showing " ++ filterType ++ " equipment available on " ++ Js.Date.toLocaleDateString(openDate)
     } else {
       // The open date and close date are at least 1 day apart
-      "Showing " ++ filterType ++ " equipment available from " ++ Js.Date.toLocaleDateString(openDate) ++ " to " ++ Js.Date.toLocaleDateString(closeDate)
+      "Showing " ++
+      filterType ++
+      " equipment available from " ++
+      Js.Date.toLocaleDateString(openDate) ++
+      " to " ++
+      Js.Date.toLocaleDateString(closeDate)
     }
   }
 
@@ -37,17 +49,19 @@ let make = (~openDate, ~closeDate, ~activeId: option<string>, ~items: array<Exec
       <span className="m-2 align-middle text-3xl font-light">
         <i className="light-icon-search" />
       </span>
-      {"Available equipment" -> str}
-      <span className="m-4 text-gray-500 text-lg shadow-lg">{heading -> str}</span>
+      {"Available equipment"->str}
+      <span className="m-4 text-gray-500 text-lg shadow-lg"> {heading->str} </span>
     </h1>
     <div className="place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4">
-      {Js.Array.map((item: ExecutorHook.InventoryItem.t) =>
-        <InventoryItem
-          key={Belt.Int.toString(item.id)}
-          item={item}
-          active={activeId == Some(Belt.Int.toString(item.id))}
-        />,
-        items) -> React.array}
+      {Js.Array.map(
+        (item: ExecutorHook.InventoryItem.t) =>
+          <InventoryItem
+            key={Belt.Int.toString(item.id)}
+            item={item}
+            active={activeId == Some(Belt.Int.toString(item.id))}
+          />,
+        items,
+      )->React.array}
     </div>
   </div>
 }

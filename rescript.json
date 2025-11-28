@@ -10,15 +10,16 @@
   "package-specs": {
     "module": "esmodule",
     "in-source": true,
-    "suffix": ".res.mjs"
+    "suffix": ".mjs"
   },
   "bs-dependencies": [
     "@rescript/core",
     "@rescript/react",
     "@fattafatta/rescript-jotai",
     "@glennsl/rescript-fetch",
+    "tilia",
     "@tilia/react"
   ],
   "bs-dev-dependencies": [],
-  "bsc-flags": ["-open RescriptCore", "-open TiliaReact"]
+  "bsc-flags": ["-open RescriptCore", "-open Tilia", "-open TiliaReact"]
 }
