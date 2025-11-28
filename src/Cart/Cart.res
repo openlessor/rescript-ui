@@ -42,9 +42,11 @@ module StateContext = {
 }
 
 @react.component
-let make = (~_items, ~count) => {
+let make = (~count) => {
   let cartState = React.useContext(StateContext.context)
   let _dispatch = React.useContext(DispatchContext.context)
+  let config = ExecutorHook.useExecutor()
+  let _items = config.inventory
   Js.Console.log({"CartState": cartState})
 
   <h1 className="block font-bold align-middle text-gray-700 text-base m-2 text-3xl">

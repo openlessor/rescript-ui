@@ -4,7 +4,6 @@ import * as Cart from "../Cart/Cart.mjs";
 import * as React from "react";
 import * as Js_array from "rescript/lib/es6/js_array.js";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
-import * as ExecutorHook from "../ExecutorHook/ExecutorHook.mjs";
 import * as InventoryList from "../InventoryList/InventoryList.mjs";
 import ReactDatepicker from "react-datepicker";
 import * as JsxRuntime from "react/jsx-runtime";
@@ -77,8 +76,6 @@ function Landing(props) {
       });
   var state = match$2[0];
   var cartCount = state.cart.length;
-  var configState = ExecutorHook.useExecutor();
-  console.log(configState.inventory);
   return JsxRuntime.jsx("div", {
               children: JsxRuntime.jsx("div", {
                     children: JsxRuntime.jsxs("div", {
@@ -134,11 +131,9 @@ function Landing(props) {
                                           JsxRuntime.jsx(InventoryList.make, {
                                                 openDate: openDate,
                                                 closeDate: match$1[0],
-                                                activeId: props.activeId,
-                                                items: configState.inventory
+                                                activeId: props.activeId
                                               }),
                                           JsxRuntime.jsx(Cart.make, {
-                                                _items: configState.inventory,
                                                 count: cartCount
                                               })
                                         ],

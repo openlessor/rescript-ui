@@ -36,7 +36,5 @@ let executorConfig = tilia({
 })
 
 let useExecutor = (): ExecutorConfig.t => {
-  useTilia()
-  Js.Console.log(executorConfig)
   executorConfig["config"]
 }

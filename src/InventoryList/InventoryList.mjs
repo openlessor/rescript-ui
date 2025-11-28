@@ -3,6 +3,8 @@
 import * as Belt_Id from "rescript/lib/es6/belt_Id.js";
 import * as Caml_obj from "rescript/lib/es6/caml_obj.js";
 import * as Js_array from "rescript/lib/es6/js_array.js";
+import * as TiliaReact from "@tilia/react/src/TiliaReact.mjs";
+import * as ExecutorHook from "../ExecutorHook/ExecutorHook.mjs";
 import * as InventoryItem from "../InventoryItem/InventoryItem.mjs";
 import * as JsxRuntime from "react/jsx-runtime";
 
@@ -16,58 +18,49 @@ var IntCmp = Belt_Id.MakeComparable({
       cmp: cmp
     });
 
-function InventoryList(props) {
-  var items = props.items;
-  var activeId = props.activeId;
-  var closeDate = props.closeDate;
-  var openDate = props.openDate;
-  console.log({
-        "InventoryList Props": {
-          openDate: openDate.toISOString(),
-          closeDate: closeDate.toISOString(),
-          activeId: activeId,
-          items: items
-        }
-      });
-  var filterType = "all";
-  var now = new Date();
-  var today = new Date(now.setHours(0.0, 0.0, 0.0, 0.0));
-  var heading = today.getTime() === openDate.getTime() ? "Showing " + filterType + " equipment available today" : (
-      openDate.getTime() === closeDate.getTime() ? "Showing " + filterType + " equipment available on " + openDate.toLocaleDateString() : "Showing " + filterType + " equipment available from " + openDate.toLocaleDateString() + " to " + closeDate.toLocaleDateString()
-    );
-  return JsxRuntime.jsxs("div", {
-              children: [
-                JsxRuntime.jsxs("h1", {
-                      children: [
-                        JsxRuntime.jsx("span", {
-                              children: JsxRuntime.jsx("i", {
-                                    className: "light-icon-search"
-                                  }),
-                              className: "m-2 align-middle text-3xl font-light"
-                            }),
-                        "Available equipment",
-                        JsxRuntime.jsx("span", {
-                              children: heading,
-                              className: "m-4 text-gray-500 text-lg shadow-lg"
-                            })
-                      ],
-                      className: "block font-bold align-middle text-gray-700 text-base m-2 text-3xl"
-                    }),
-                JsxRuntime.jsx("div", {
-                      children: Js_array.map((function (item) {
-                              return JsxRuntime.jsx(InventoryItem.make, {
-                                          item: item,
-                                          active: Caml_obj.equal(activeId, String(item.id))
-                                        }, String(item.id));
-                            }), items),
-                      className: "place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4"
-                    })
-              ],
-              className: "m-4 px-1 py-1"
-            });
-}
-
-var make = InventoryList;
+var make = TiliaReact.leaf(function (props) {
+      var activeId = props.activeId;
+      var closeDate = props.closeDate;
+      var openDate = props.openDate;
+      var config = ExecutorHook.useExecutor();
+      var items = config.inventory;
+      var filterType = "all";
+      var now = new Date();
+      var today = new Date(now.setHours(0.0, 0.0, 0.0, 0.0));
+      var heading = today.getTime() === openDate.getTime() ? "Showing " + filterType + " equipment available today" : (
+          openDate.getTime() === closeDate.getTime() ? "Showing " + filterType + " equipment available on " + openDate.toLocaleDateString() : "Showing " + filterType + " equipment available from " + openDate.toLocaleDateString() + " to " + closeDate.toLocaleDateString()
+        );
+      return JsxRuntime.jsxs("div", {
+                  children: [
+                    JsxRuntime.jsxs("h1", {
+                          children: [
+                            JsxRuntime.jsx("span", {
+                                  children: JsxRuntime.jsx("i", {
+                                        className: "light-icon-search"
+                                      }),
+                                  className: "m-2 align-middle text-3xl font-light"
+                                }),
+                            "Available equipment",
+                            JsxRuntime.jsx("span", {
+                                  children: heading,
+                                  className: "m-4 text-gray-500 text-lg shadow-lg"
+                                })
+                          ],
+                          className: "block font-bold align-middle text-gray-700 text-base m-2 text-3xl"
+                        }),
+                    JsxRuntime.jsx("div", {
+                          children: Js_array.map((function (item) {
+                                  return JsxRuntime.jsx(InventoryItem.make, {
+                                              item: item,
+                                              active: Caml_obj.equal(activeId, String(item.id))
+                                            }, String(item.id));
+                                }), items),
+                          className: "place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4"
+                        })
+                  ],
+                  className: "m-4 px-1 py-1"
+                });
+    });
 
 export {
   str ,

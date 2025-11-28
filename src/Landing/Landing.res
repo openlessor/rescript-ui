@@ -49,9 +49,6 @@ let make = (~dateA=?, ~dateB=?, ~activeId: option<string>) => {
   }, {items: [], selected_item: None, cart: []})
   let cartCount = Belt.Array.length(state.cart)
 
-  let configState: ExecutorHook.ExecutorConfig.t = ExecutorHook.useExecutor()
-  Js.Console.log(configState.inventory)
-
   <div className="justify-center flex items-center">
     <div className="w-full rounded-sm shadow-lg p-4">
       <div className="bg-zinc-100 rounded-sm px-4 py-4">
@@ -84,13 +81,8 @@ let make = (~dateA=?, ~dateB=?, ~activeId: option<string>) => {
         </div>
         <Cart.StateContext.Provider value={state}>
           <Cart.DispatchContext.Provider value={dispatch}>
-            <InventoryList
-              activeId={activeId}
-              openDate={openDate}
-              closeDate={closeDate}
-              items={configState.inventory}
-            />
-            <Cart count={cartCount} _items={configState.inventory} />
+            <InventoryList activeId={activeId} openDate={openDate} closeDate={closeDate} />
+            <Cart count={cartCount} />
           </Cart.DispatchContext.Provider>
         </Cart.StateContext.Provider>
         <div className="w-full">
