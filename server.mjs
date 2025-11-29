@@ -38,8 +38,14 @@ async function createServer() {
     app.use("*", async (req, res) => {
       try {
         const url = req.originalUrl || req.url || "/";
-        const { html: appHtml } = await render(url);
-        const html = templateHtml.replace(HTML_PLACEHOLDER, appHtml);
+        const { html: appHtml, executorConfig } = await render(url);
+        const stateJson = JSON.stringify(executorConfig);
+        const html = templateHtml
+          .replace(HTML_PLACEHOLDER, appHtml)
+          .replace(
+            "</body>",
+            `<script>window.__EXECUTOR_CONFIG__=${stateJson};</script></body>`,
+          );
         res.status(200).set({ "Content-Type": "text/html" }).end(html);
       } catch (error) {
         console.error("[ssr]", error);

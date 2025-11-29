@@ -11,7 +11,6 @@ function str(prim) {
 function InventoryItem(props) {
   var item = props.item;
   var id = item.id;
-  RescriptReactRouter.useUrl(undefined, undefined);
   var matches = [];
   var matchCount = matches.length;
   var quantity = matchCount > 0 ? String(matches.length) : "0";

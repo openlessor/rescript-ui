@@ -17,7 +17,7 @@ let make = (~item: t, ~active=?) => {
   let image = "https://placeholdr.ai/1ca27004-f6f9-413a-8dbf-6c088feabead/256/256"
   //let _dispatch = React.useContext(Cart.DispatchContext.context)
   //let cartState = React.useContext(Cart.StateContext.context)
-  let {path} = RescriptReactRouter.useUrl()
+  //let {path} = RescriptReactRouter.useUrl()
   let matches = [] // Js.Array.filter(cart_item => cart_item == item.id, cartState.cart)
   let matchCount = Js.Array.length(matches)
   let quantity = matchCount > 0 ? Belt.Int.toString(Js.Array.length(matches)) : "0"
