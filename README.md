@@ -23,12 +23,12 @@ Coming soon
 - Cloud Server
 - Website Subscription
 
-## Plans for Frontend POC (written in ReScript using Reason React)
+## Plans for Frontend POC (written in ReScript using ReScript React)
 - Nearly zero configuration React components which you simply need to point to Executor endpoint URL to bootstrap
 - Styled using Tailwind CSS and packaged via Vite's SSR + client hydration pipeline
-- Frontend POC will be deployed to Linode bucket
+- Frontend POC will run Vite Server, possibly deployed to CloudFlare containers
 
-## Plans for Backend POC (OpenLessor Executor; written in Rust using Rocket and Diesel)
+## Plans for Backend POC (OpenLessor Executor; written in ReScript using rescript-bun)
 - Multiple billing period type (i.e.: seconds, minutes, days, weeks, months)
 - Configurable to call a provisioner (i.e.: hook for GET/POST URL during different phases; open source micro service for this TBD)
 - Each product subscription type will have it's own unique endpoint URL for configuring frontend React HOC
@@ -36,6 +36,15 @@ Coming soon
 
 All with multiple billing types depending on if it fits the use case; such as per minute, per day, per week, per month.
 
+## Why two separate repositories?
+Currently the bindings for ReScript and Bun only support ReScript v12. Most other libraries in the ReScript ecosystem haven't caught up to the breaking changes of ReScript v12 yet. Once this changes, the repositories may be merged so that we can do things like share types between the frontend and backend easily. We will also evaluate if we can run everything using Bun as well, or maybe we should support multiple runtimes?
+
 ## Vision
 
-OpenLessor will be an open source project for lease management, and subscription management. It will offer multiple billing types based on time units such as minutes, days, weeks, and months. I am currently working on this in my freetime and my hope is that the project will slowly progress over time. This is the frontend POC which will eventually interact with the backend service. The backend service is yet to be developed, however you will soon find it as a Rust project in a repository of the same organization.
+OpenLessor will be an open source project for lease management, and subscription management. It will offer multiple billing types based on time units such as minutes, days, weeks, and months. I am currently working on this in my freetime and my hope is that the project will slowly progress over time. This is the frontend POC which will eventually interact with the backend service. The backend service is also being developed and is available in the [Executor](https://github.com/openlessor/executor) repository.
+
+A key principal of OpenLessor will be performance first. That's why we adapt the latest bleeding edge technology when developing the stack.
+
+# Fully Customizable
+
+The end goal of OpenLessor is to create a completely customizable software that can be easily integrated into your organization.
