@@ -3,11 +3,14 @@ module ExecutorConfig = {
 
   @scope("JSON") @val
   external parseJSON: string => t = "parse"
-
-  let endpoint_url: string = "https://62210a40afd560ea69a5c07b.mockapi.io/mock"
-  let fetch = async () => {
+  /**
+❯ curl http://localhost:54432/config/0e36f6ba-ac5d-423e-a3bb-bb939e1cb326
+{"inventory":[{"id":1,"name":"test inventory","description":"testing","quantity":0,"tenantid":"0e36f6ba-ac5d-423e-a3bb-bb939e1cb326"}],"tenant":{"id":"0e36f6ba-ac5d-423e-a3bb-bb939e1cb326","name":"Example Tenant","description":"An example tenant"}}%
+**/
+  let base_url: string = "http://localhost:8899"
+  let fetch = async (tenantId: string) => {
     open Fetch
-    let response = await fetch(endpoint_url, {method: #GET})
+    let response = await fetch(`${base_url}/config/${tenantId}`, {method: #GET})
     parseJSON(await response->Response.text)
   }
 }
@@ -35,9 +38,11 @@ let initialExecutorConfig = switch Js.Nullable.toOption(domExecutorConfig) {
 | Some(config) => config
 | None => SSR.empty
 }
+// XXX: For now we hardcode the tenant ID
+let tenantId = "0e36f6ba-ac5d-423e-a3bb-bb939e1cb326"
 let executorConfig = tilia({
   "config": source(initialExecutorConfig, async (_prev, set) => {
-    let config = await ExecutorConfig.fetch()
+    let config = await ExecutorConfig.fetch(tenantId)
     set(config)
   }),
 })

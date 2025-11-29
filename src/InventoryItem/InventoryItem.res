@@ -1,19 +1,13 @@
 let str = React.string
 
-type t = {
-  id: int,
-  description: string,
-  image: string,
-  title: string,
-  quantity: int,
-}
+type t = Inventory__sql.query1Result
 
 @scope("JSON") @val
 external _parseJSON: string => t = "parse"
 
 @react.component
 let make = (~item: t, ~active=?) => {
-  let {id, title, description} = item
+  let {id, name, description} = item
   let image = "https://placeholdr.ai/1ca27004-f6f9-413a-8dbf-6c088feabead/256/256"
   //let _dispatch = React.useContext(Cart.DispatchContext.context)
   //let cartState = React.useContext(Cart.StateContext.context)

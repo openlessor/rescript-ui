@@ -1,6 +1,6 @@
 module ExecutorConfig: {
   type t = {inventory: array<InventoryItem.t>}
-  let fetch: unit => promise<t>
+  let fetch: string => promise<t>
 }
 
 module SSR: {
