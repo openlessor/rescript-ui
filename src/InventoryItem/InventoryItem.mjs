@@ -20,7 +20,7 @@ function InventoryItem(props) {
                     children: [
                       JsxRuntime.jsx("div", {
                             children: JsxRuntime.jsx("img", {
-                                  className: "p-[1.5]",
+                                  className: "p-[1.5] w-40 h-40",
                                   style: {
                                     width: "100%"
                                   },
@@ -63,7 +63,7 @@ function InventoryItem(props) {
                             children: [
                               JsxRuntime.jsx("h2", {
                                     children: item.title,
-                                    className: "w-full text-xs drop-shadow-sm text-gray-500"
+                                    className: "text-xs drop-shadow-sm text-gray-500"
                                   }),
                               JsxRuntime.jsx("p", {
                                     children: item.description,

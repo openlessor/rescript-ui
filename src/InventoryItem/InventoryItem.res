@@ -32,7 +32,7 @@ let make = (~item: t, ~active=?) => {
     className="block">
     <button className="relative m-[1.5] flex flex-col">
       <div className="rounded-sm border-2 shadow-sm m-0 p-0">
-        <img className="p-[1.5]" src={image} style={Obj.magic({"width": "100%"})} />
+        <img className="p-[1.5] w-40 h-40" src={image} style={Obj.magic({"width": "100%"})} />
       </div>
       <div className="flex flex-row justify-between w-full bg-gray-300 text-white shadow-sm">
         <span className="drop-shadow-sm">
@@ -46,7 +46,7 @@ let make = (~item: t, ~active=?) => {
       </div>
       <div
         className="flex flex-col text-align-center w-full bg-white text-gray-300 rounded-sm m-[1.5] justify-self-end">
-        <h2 className="w-full text-xs drop-shadow-sm text-gray-500"> {title->str} </h2>
+        <h2 className="text-xs drop-shadow-sm text-gray-500"> {title->str} </h2>
         <p className={(active == Some(true) ? "" : "hidden ") ++ "text-xs m-2"}>
           {description->str}
         </p>
