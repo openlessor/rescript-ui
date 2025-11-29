@@ -6,5 +6,5 @@ module ExecutorConfig: {
 //  | ErrorLoadingEndpoint
 //  | LoadingEndpoint
 //  | LoadedEndpoint(ExecutorConfig.t)
-
+let fetchExecutorConfig: unit => promise<ExecutorConfig.t>
 let useExecutor: unit => ExecutorConfig.t

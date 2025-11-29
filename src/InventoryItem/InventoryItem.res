@@ -29,9 +29,7 @@ let make = (~item: t, ~active=?) => {
       RescriptReactRouter.replace("/item/" ++ Belt.Int.toString(id))
     }}
     href={"/item/" ++ Belt.Int.toString(id)}
-    className={path->List.get(1) == Some(Belt.Int.toString(id))
-      ? "col-span-4 lg:col-span-8"
-      : "" ++ " block"}>
+    className="block">
     <button className="relative m-[1.5] flex flex-col">
       <div className="rounded-sm border-2 shadow-sm m-0 p-0">
         <img className="p-[1.5]" src={image} style={Obj.magic({"width": "100%"})} />

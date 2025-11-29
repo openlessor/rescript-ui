@@ -1,3 +1,5 @@
+open ExecutorHook
+
 let getActiveId = (url: RescriptReactRouter.url) => {
   switch url.path {
   | list{"item", id, ..._} => Some(id)
@@ -6,7 +8,7 @@ let getActiveId = (url: RescriptReactRouter.url) => {
 }
 
 @react.component
-let make = (~serverUrl: RescriptReactRouter.url=?) => {
+let make = (~serverUrl: option<RescriptReactRouter.url>=?) => {
   let initialUrl = RescriptReactRouter.useUrl(~serverUrl?, ())
   let (url, setUrl) = React.useState(() => initialUrl)
   let (activeId, setActiveId) = React.useState(() => getActiveId(url))

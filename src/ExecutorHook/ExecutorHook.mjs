@@ -11,12 +11,10 @@ async function fetchExecutorConfig() {
   return JSON.parse(await response.text());
 }
 
-var empty = {
-  inventory: []
-};
+var initialExecutorConfig = ((typeof window !== 'undefined' ? window.__EXECUTOR_CONFIG__ ?? null : null));
 
 var executorConfig = Tilia.tilia({
-      config: Tilia.source(empty, (async function (_prev, set) {
+      config: Tilia.source(initialExecutorConfig, (async function (_prev, set) {
               var config = await fetchExecutorConfig();
               return set(config);
             }))
@@ -28,6 +26,7 @@ function useExecutor() {
 
 export {
   ExecutorConfig ,
+  fetchExecutorConfig ,
   useExecutor ,
 }
-/* executorConfig Not a pure module */
+/* initialExecutorConfig Not a pure module */

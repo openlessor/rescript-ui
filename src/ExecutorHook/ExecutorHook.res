@@ -13,9 +13,11 @@ let fetchExecutorConfig = async () => {
   ExecutorConfig.parseJSON(await response->Response.text)
 }
 
-let empty: ExecutorConfig.t = {inventory: []}
+let initialExecutorConfig = %raw(
+  "(typeof window !== 'undefined' ? window.__EXECUTOR_CONFIG__ ?? null : null)"
+)
 let executorConfig = tilia({
-  "config": source(empty, async (_prev, set) => {
+  "config": source(initialExecutorConfig, async (_prev, set) => {
     let config = await fetchExecutorConfig()
     set(config)
   }),
