@@ -48,3 +48,8 @@ A key principal of OpenLessor will be performance first. That's why we adapt the
 # Fully Customizable
 
 The end goal of OpenLessor is to create a completely customizable software that can be easily integrated into your organization.
+
+### Created by Brian Kaplan @ Software Deployed
+[https://softwaredeployed.com](https://softwaredeployed.com)
+
+If you wish to contact me, a contact form is available on the website linked above.
