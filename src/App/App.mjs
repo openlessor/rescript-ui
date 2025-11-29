@@ -22,7 +22,7 @@ function getActiveId(url) {
 }
 
 function App(props) {
-  var initialUrl = RescriptReactRouter.useUrl(undefined, undefined);
+  var initialUrl = RescriptReactRouter.useUrl(props.serverUrl, undefined);
   var match = React.useState(function () {
         return initialUrl;
       });

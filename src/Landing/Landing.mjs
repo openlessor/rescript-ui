@@ -4,8 +4,8 @@ import * as Cart from "../Cart/Cart.mjs";
 import * as React from "react";
 import * as Js_array from "rescript/lib/es6/js_array.js";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
+import * as DatePicker from "../DatePicker/DatePicker.mjs";
 import * as InventoryList from "../InventoryList/InventoryList.mjs";
-import ReactDatepicker from "react-datepicker";
 import * as JsxRuntime from "react/jsx-runtime";
 import * as ReservationTypeSelection from "../ReservationTypeSelection/ReservationTypeSelection.mjs";
 
@@ -104,7 +104,7 @@ function Landing(props) {
                                   ],
                                   className: "align-middle text-gray-700 text-base m-2"
                                 }),
-                            JsxRuntime.jsx(ReactDatepicker, {
+                            JsxRuntime.jsx(DatePicker.make, {
                                   calendarClassName: "bg-white",
                                   className: "m-2 ml-14 block",
                                   isOpen: false,

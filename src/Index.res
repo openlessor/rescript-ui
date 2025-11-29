@@ -7,8 +7,6 @@ open ReactDOM.Client
 let rootElement = ReactDOM.querySelector("#root")
 
 switch rootElement {
-| Some(domNode) =>
-  let root = createRoot(domNode)
-  Root.render(root, <App />)
+| Some(domNode) => hydrateRoot(domNode, <App />)->ignore
 | None => Js.log("No root element found")
 }

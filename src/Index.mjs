@@ -16,8 +16,7 @@ var rootElement = document.querySelector("#root");
 if (rootElement == null) {
   console.log("No root element found");
 } else {
-  var root = Client.createRoot(rootElement);
-  root.render(JsxRuntime.jsx(App.make, {}));
+  Client.hydrateRoot(rootElement, JsxRuntime.jsx(App.make, {}));
 }
 
 var rootElement$1 = (rootElement == null) ? undefined : Caml_option.some(rootElement);

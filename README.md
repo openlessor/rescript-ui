@@ -3,7 +3,16 @@
 Written using ReScript and React. This is a work in progress. In it's current state, it should not be used by anyone. Any or all of this document is subject to change. 
 
 ## Running the frontend POC
-Coming soon
+Use the Vite-powered SSR dev server so the HTML streamed from the server matches the client-side hydration.
+
+1. Install dependencies: `yarn install`
+2. Start the SSR dev server (with hot reload) via `yarn dev`
+3. Visit `http://localhost:5173` to interact with the app rendered on the server and hydrated in the browser.
+
+### Production preview
+1. Build the client and server bundles: `yarn build`
+2. Boot the prebuilt SSR server locally: `yarn preview`
+3. Deploy the files inside `dist/client` as static assets and run `yarn start` (or `node server.mjs`) on your server to serve the rendered HTML plus hydration entry.
 
 ## Frontend POC URL
 Coming soon
@@ -16,7 +25,7 @@ Coming soon
 
 ## Plans for Frontend POC (written in ReScript using Reason React)
 - Nearly zero configuration React components which you simply need to point to Executor endpoint URL to bootstrap
-- Styled using Tailwind CSS and Packaged using ParcelJS
+- Styled using Tailwind CSS and packaged via Vite's SSR + client hydration pipeline
 - Frontend POC will be deployed to Linode bucket
 
 ## Plans for Backend POC (OpenLessor Executor; written in Rust using Rocket and Diesel)
