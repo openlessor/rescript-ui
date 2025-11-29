@@ -7,7 +7,7 @@ module ExecutorConfig = {
 ❯ curl http://localhost:54432/config/0e36f6ba-ac5d-423e-a3bb-bb939e1cb326
 {"inventory":[{"id":1,"name":"test inventory","description":"testing","quantity":0,"tenantid":"0e36f6ba-ac5d-423e-a3bb-bb939e1cb326"}],"tenant":{"id":"0e36f6ba-ac5d-423e-a3bb-bb939e1cb326","name":"Example Tenant","description":"An example tenant"}}%
 **/
-  let base_url: string = "http://localhost:8899"
+  let base_url: string = "http://localhost:5173/api"
   let fetch = async (tenantId: string) => {
     open Fetch
     let response = await fetch(`${base_url}/config/${tenantId}`, {method: #GET})

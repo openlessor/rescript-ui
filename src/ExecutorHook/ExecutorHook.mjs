@@ -4,7 +4,7 @@ import * as Tilia from "tilia/src/Tilia.mjs";
 import * as React from "react";
 
 async function $$fetch$1(tenantId) {
-  var response = await fetch("http://localhost:8899/config/" + tenantId, {
+  var response = await fetch("http://localhost:5173/api/config/" + tenantId, {
         method: "GET"
       });
   return JSON.parse(await response.text());
