@@ -3,9 +3,11 @@ type renderResult = {executorConfig: ExecutorConfig.t, html: string}
 
 let render = (url: string): Js.Promise.t<renderResult> => {
   let appUrl = RescriptReactRouter.dangerouslyGetInitialUrl(~serverUrlString=url, ())
-  ExecutorHook.fetchExecutorConfig()->Promise.then(config =>
+  ExecutorConfig.fetch()->Promise.then(config =>
     Js.Promise.resolve({
-      html: ReactDOMServer.renderToString(<App serverUrl={appUrl} />),
+      html: ReactDOMServer.renderToString(
+        <App initialExecutorConfig={config} serverUrl={appUrl} />,
+      ),
       executorConfig: config,
     })
   )

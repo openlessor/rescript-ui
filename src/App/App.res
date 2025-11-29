@@ -8,7 +8,10 @@ let getActiveId = (url: RescriptReactRouter.url) => {
 }
 
 @react.component
-let make = (~serverUrl: option<RescriptReactRouter.url>=?) => {
+let make = (
+  ~initialExecutorConfig: option<ExecutorConfig.t>=?,
+  ~serverUrl: option<RescriptReactRouter.url>=?,
+) => {
   let initialUrl = RescriptReactRouter.useUrl(~serverUrl?, ())
   let (url, setUrl) = React.useState(() => initialUrl)
   let (activeId, setActiveId) = React.useState(() => getActiveId(url))
@@ -23,8 +26,15 @@ let make = (~serverUrl: option<RescriptReactRouter.url>=?) => {
     Some(() => RescriptReactRouter.unwatchUrl(watcherID))
   })
 
-  switch url.path {
-  | list{"item", ..._} | list{} => <Landing activeId={activeId} />
-  | _ => <ErrorView />
+  let executorConfigValue = switch initialExecutorConfig {
+  | Some(value) => value
+  | None => ExecutorHook.SSR.empty
   }
+
+  <SSR.Provider value={executorConfigValue}>
+    {switch url.path {
+    | list{"item", ..._} | list{} => <Landing activeId={activeId} />
+    | _ => <ErrorView />
+    }}
+  </SSR.Provider>
 }

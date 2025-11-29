@@ -8,10 +8,11 @@ import * as RescriptReactRouter from "@rescript/react/src/RescriptReactRouter.mj
 
 function render(url) {
   var appUrl = RescriptReactRouter.dangerouslyGetInitialUrl(url, undefined);
-  return ExecutorHook.fetchExecutorConfig().then(function (config) {
+  return ExecutorHook.ExecutorConfig.$$fetch().then(function (config) {
               return Promise.resolve({
                           executorConfig: config,
                           html: Server.renderToString(JsxRuntime.jsx(App.make, {
+                                    initialExecutorConfig: config,
                                     serverUrl: appUrl
                                   }))
                         });
