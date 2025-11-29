@@ -1,16 +1,3 @@
-module InventoryItem = {
-  type t = {
-    id: int,
-    description: string,
-    image: string,
-    title: string,
-    quantity: int,
-  }
-
-  @scope("JSON") @val
-  external _parseJSON: string => t = "parse"
-}
-
 module ExecutorConfig = {
   type t = {inventory: array<InventoryItem.t>}
 

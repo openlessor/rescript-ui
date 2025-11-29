@@ -1,9 +1,10 @@
+open ExecutorHook
 let str = React.string
 
 type rec t = {
   cart: array<int>,
   selected_item: option<int>,
-  items: array<ExecutorHook.InventoryItem.t>,
+  items: array<InventoryItem.t>,
 }
 
 let itemCount = state => {
@@ -45,7 +46,7 @@ module StateContext = {
 let make = (~count) => {
   let cartState = React.useContext(StateContext.context)
   let _dispatch = React.useContext(DispatchContext.context)
-  let config = ExecutorHook.useExecutor()
+  let config = useExecutor()
   let _items = config.inventory
   Js.Console.log({"CartState": cartState})
 

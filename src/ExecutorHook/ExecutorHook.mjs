@@ -2,8 +2,6 @@
 
 import * as Tilia from "tilia/src/Tilia.mjs";
 
-var InventoryItem = {};
-
 var ExecutorConfig = {};
 
 async function fetchExecutorConfig() {
@@ -29,7 +27,6 @@ function useExecutor() {
 }
 
 export {
-  InventoryItem ,
   ExecutorConfig ,
   useExecutor ,
 }

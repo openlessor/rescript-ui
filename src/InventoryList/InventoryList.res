@@ -1,3 +1,4 @@
+open ExecutorHook
 let str = React.string
 
 module IntCmp = Belt.Id.MakeComparable({
@@ -7,7 +8,7 @@ module IntCmp = Belt.Id.MakeComparable({
 
 @react.component
 let make = leaf((~openDate, ~closeDate, ~activeId: option<string>) => {
-  let config: ExecutorHook.ExecutorConfig.t = ExecutorHook.useExecutor()
+  let config: ExecutorConfig.t = useExecutor()
   let items = config.inventory
   let filterType = "all"
   let now = Js.Date.make()
@@ -42,7 +43,7 @@ let make = leaf((~openDate, ~closeDate, ~activeId: option<string>) => {
     </h1>
     <div className="place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4">
       {Js.Array.map(
-        (item: ExecutorHook.InventoryItem.t) =>
+        (item: InventoryItem.t) =>
           <InventoryItem
             key={Belt.Int.toString(item.id)}
             item={item}
