@@ -1,6 +1,12 @@
 let str = React.string
 
-type t = Inventory__sql.query1Result
+type t = {
+  description: string,
+  id: int,
+  name: string,
+  quantity: int,
+  tenantid: string,
+}
 
 @scope("JSON") @val
 external _parseJSON: string => t = "parse"
@@ -40,7 +46,7 @@ let make = (~item: t, ~active=?) => {
       </div>
       <div
         className="flex flex-col text-align-center w-full bg-white text-gray-300 rounded-sm m-[1.5] justify-self-end">
-        <h2 className="text-xs drop-shadow-sm text-gray-500"> {title->str} </h2>
+        <h2 className="text-xs drop-shadow-sm text-gray-500"> {name->str} </h2>
         <p className={(active == Some(true) ? "" : "hidden ") ++ "text-xs m-2"}>
           {description->str}
         </p>
