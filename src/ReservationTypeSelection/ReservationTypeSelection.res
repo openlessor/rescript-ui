@@ -1,13 +1,5 @@
 let str = React.string
 
-module State = {
-  type t =
-    | Hourly
-    | Daily
-  let defaultState: t = Hourly
-  let (state, set) = signal(defaultState)
-}
-
 @react.component
 let make = leaf(() => {
   <div className="my-auto">
@@ -18,8 +10,14 @@ let make = leaf(() => {
         name="type"
         type_="radio"
         value="hour"
-        onChange={_ => State.set(State.Hourly)}
-        defaultChecked={State.state.value == State.Hourly}
+        onChange={e => {
+          let inputEl = e->ReactEvent.Form.currentTarget
+          if inputEl["checked"] == true {
+            Period.set(Period.Hourly)
+          }
+        }}
+        checked={State.store["period"] == Period.Hourly}
+        autoComplete="off"
       />
       <span className="p-1 pl-0"> {" Per Hour"->str} </span>
     </label>
@@ -30,8 +28,14 @@ let make = leaf(() => {
         name="type"
         type_="radio"
         value="date"
-        onChange={_ => State.set(State.Daily)}
-        defaultChecked={State.state.value == State.Daily}
+        onChange={e => {
+          let inputEl = e->ReactEvent.Form.currentTarget
+          if inputEl["checked"] == true {
+            Period.set(Period.Daily)
+          }
+        }}
+        checked={State.store["period"] == Period.Daily}
+        autoComplete="off"
       />
       <span className="p-1 pl-0"> {" Per Day"->str} </span>
     </label>

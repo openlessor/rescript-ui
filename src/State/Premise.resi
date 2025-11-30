@@ -15,4 +15,4 @@ module SSR: {
   }
 }
 
-let state: {"config": Config.t}
+let state: Config.t

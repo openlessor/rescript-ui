@@ -3,6 +3,7 @@
 import * as Card from "../Ui/Card.mjs";
 import * as Cart from "../Cart/Cart.mjs";
 import * as Icon from "../Ui/Icon.mjs";
+import * as State from "../State/State.mjs";
 import * as React from "react";
 import * as Js_array from "rescript/lib/es6/js_array.js";
 import * as Container from "../Ui/Container.mjs";
@@ -38,7 +39,7 @@ function removeFromCart(state, id) {
 var make = TiliaReact.leaf(function (props) {
       var dateB = props.dateB;
       var dateA = props.dateA;
-      var reservation_type = ReservationTypeSelection.State.state.value;
+      var period = State.store.period;
       var now = new Date();
       var today = new Date(now.setHours(0.0, 0.0, 0.0, 0.0));
       var match = React.useState(function () {
@@ -152,7 +153,7 @@ var make = TiliaReact.leaf(function (props) {
                                                 })
                                           ],
                                           className: "my-auto " + (
-                                            reservation_type === "Hourly" ? "hidden" : ""
+                                            period === "Hourly" ? "hidden" : ""
                                           )
                                         })
                                   ],

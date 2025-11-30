@@ -45,7 +45,7 @@ module StateContext = {
 let make = (~count) => {
   let cartState = React.useContext(StateContext.context)
   let _dispatch = React.useContext(DispatchContext.context)
-  let config: Premise.Config.t = Premise.state["config"]
+  let config: Premise.Config.t = State.store["config"]
   let _items = config.inventory
   Js.Console.log({"CartState": cartState})
 

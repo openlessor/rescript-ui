@@ -29,12 +29,10 @@ var domExecutorConfig = ((typeof window !== 'undefined' ? window.__EXECUTOR_CONF
 
 var initialExecutorConfig = (domExecutorConfig == null) ? empty : domExecutorConfig;
 
-var state = Tilia.tilia({
-      config: Tilia.source(initialExecutorConfig, (async function (_prev, set) {
-              var config = await $$fetch$1("a55351b1-1b78-4b6c-bd13-6859dc9ad410");
-              return set(config);
-            }))
-    });
+var state = Tilia.source(initialExecutorConfig, (async function (_prev, set) {
+        var config = await $$fetch$1("a55351b1-1b78-4b6c-bd13-6859dc9ad410");
+        return set(config);
+      }));
 
 var Config = {
   $$fetch: $$fetch$1

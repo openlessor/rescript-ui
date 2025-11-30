@@ -2,8 +2,8 @@
 
 import * as Card from "../Ui/Card.mjs";
 import * as Icon from "../Ui/Icon.mjs";
+import * as State from "../State/State.mjs";
 import * as Belt_Id from "rescript/lib/es6/belt_Id.js";
-import * as Premise from "../State/Premise.mjs";
 import * as Caml_obj from "rescript/lib/es6/caml_obj.js";
 import * as Js_array from "rescript/lib/es6/js_array.js";
 import * as TiliaReact from "@tilia/react/src/TiliaReact.mjs";
@@ -24,7 +24,7 @@ var make = TiliaReact.leaf(function (props) {
       var activeId = props.activeId;
       var closeDate = props.closeDate;
       var openDate = props.openDate;
-      var config = Premise.state.config;
+      var config = State.store.config;
       var items = config.inventory;
       var filterType = "all";
       var now = new Date();
