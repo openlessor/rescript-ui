@@ -3,8 +3,10 @@
 import * as Tilia from "tilia/src/Tilia.mjs";
 import * as React from "react";
 
+var base_url = import.meta.env.API_BASE_URL;
+
 async function $$fetch$1(premiseId) {
-  var response = await fetch("http://localhost:5173/api/config/" + premiseId, {
+  var response = await fetch(base_url + "/config/" + premiseId, {
         method: "GET"
       });
   return JSON.parse(await response.text());
@@ -53,4 +55,4 @@ export {
   SSR ,
   state ,
 }
-/* context Not a pure module */
+/* base_url Not a pure module */
