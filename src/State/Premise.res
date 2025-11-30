@@ -6,7 +6,7 @@ module Config = {
 
   // XXX @todo Make this base URL configurable from an env var
   // window.location.origin is not SSR friendly
-  let base_url: string = %raw(`import.meta.env.API_BASE_URL`)
+  let base_url: string = %raw(`import.meta.env.VITE_API_BASE_URL`)
   let fetch = async (premiseId: string) => {
     open Fetch
     let response = await fetch(`${base_url}/config/${premiseId}`, {method: #GET})

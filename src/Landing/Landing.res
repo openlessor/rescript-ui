@@ -1,3 +1,4 @@
+open State
 let str = React.string
 
 let addToCart = (state: Cart.t, id) => {
@@ -14,31 +15,39 @@ let removeFromCart = (state: Cart.t, id) => {
 }
 
 @react.component
-let make = leaf((~dateA=?, ~dateB=?, ~activeId: option<string>) => {
-  let period = State.store["period"]
+let make = leaf((~activeId: option<string>) => {
+  let period = main_store["period"]
   let now = Js.Date.make()
   let today = Js.Date.fromFloat(
     Js.Date.setHoursMSMs(now, ~hours=0.0, ~minutes=0.0, ~seconds=0.0, ~milliseconds=0.0, ()),
   )
 
-  let (openDate, setOpenDate) = React.useState(() =>
-    switch dateA {
-    | Some(date) => Js.Date.fromString(date)
-    | None => today
-    }
-  )
-  let (closeDate, setCloseDate) = React.useState(() =>
-    switch dateB {
-    | Some(date) => Js.Date.fromString(date)
-    | None => openDate
-    }
-  )
-  let updateOpenDate = openDate => {
-    setOpenDate(openDate)
+  let (openDate, setOpenDate) = React.useState(() => today)
+  let (closeDate, setCloseDate) = React.useState(() => today)
+  React.useEffect(() => {
+    Js.Console.log("Open Date:")
+    Js.Console.log(openDate)
+    Js.Console.log("Close Date:")
+    Js.Console.log(closeDate)
+    Some(() => ())
+  }, [openDate, closeDate])
+
+  let updateOpenDate = (openDate: Js.Nullable.t<Js.Date.t>) => {
+    setOpenDate(_prev =>
+      switch openDate {
+      | Js.Nullable.Value(date) => date
+      | _ => today
+      }
+    )
     //setCloseDate(openDate)
   }
-  let updateCloseDate = closeDate => {
-    setCloseDate(closeDate)
+  let updateCloseDate = (openDate: Js.Nullable.t<Js.Date.t>) => {
+    setCloseDate(_prev =>
+      switch openDate {
+      | Js.Nullable.Value(date) => date
+      | _ => today
+      }
+    )
   }
 
   let (state, dispatch) = React.useReducer((state, action) => {

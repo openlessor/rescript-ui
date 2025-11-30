@@ -1,3 +1,4 @@
+open State
 let str = React.string
 
 type rec t = {
@@ -45,7 +46,7 @@ module StateContext = {
 let make = (~count) => {
   let cartState = React.useContext(StateContext.context)
   let _dispatch = React.useContext(DispatchContext.context)
-  let config: Premise.Config.t = State.store["config"]
+  let config: Premise.Config.t = main_store["config"]
   let _items = config.inventory
   Js.Console.log({"CartState": cartState})
 

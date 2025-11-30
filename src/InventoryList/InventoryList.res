@@ -1,3 +1,4 @@
+open State
 let str = React.string
 
 module IntCmp = Belt.Id.MakeComparable({
@@ -6,17 +7,35 @@ module IntCmp = Belt.Id.MakeComparable({
 })
 
 @react.component
-let make = leaf((~openDate, ~closeDate, ~activeId: option<string>) => {
-  let config: Premise.Config.t = State.store["config"]
+let make = leaf((
+  ~openDate: option<Js.Date.t>=?,
+  ~closeDate: option<Js.Date.t>=?,
+  ~activeId: option<string>,
+) => {
+  let config: Premise.Config.t = main_store["config"]
   let items = config.inventory
   let filterType = "all"
   let now = Js.Date.make()
   let today = Js.Date.fromFloat(
     Js.Date.setHoursMSMs(now, ~hours=0.0, ~minutes=0.0, ~seconds=0.0, ~milliseconds=0.0, ()),
   )
-
+  let openDate = switch openDate {
+  | Some(date) => date
+  | _ => today
+  }
+  let closeDate = switch closeDate {
+  | Some(date) => date
+  | _ => today
+  }
+  React.useEffect(() => {
+    Js.Console.log("Open Date:")
+    Js.Console.log(openDate)
+    Js.Console.log("Close Date:")
+    Js.Console.log(closeDate)
+    Some(() => ())
+  }, [openDate, closeDate])
   let heading = {
-    if Js.Date.getTime(openDate) != Js.Date.getTime(closeDate) {
+    if openDate != closeDate {
       // The open date and close date are at least 1 day apart
       "Showing " ++
       filterType ++

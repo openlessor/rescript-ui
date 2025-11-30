@@ -3,7 +3,7 @@
 import * as Tilia from "tilia/src/Tilia.mjs";
 import * as React from "react";
 
-var base_url = import.meta.env.API_BASE_URL;
+var base_url = import.meta.env.VITE_API_BASE_URL;
 
 async function $$fetch$1(premiseId) {
   var response = await fetch(base_url + "/config/" + premiseId, {

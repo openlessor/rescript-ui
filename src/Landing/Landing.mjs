@@ -10,6 +10,7 @@ import * as Container from "../Ui/Container.mjs";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 import * as DatePicker from "../DatePicker/DatePicker.mjs";
 import * as TiliaReact from "@tilia/react/src/TiliaReact.mjs";
+import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as InventoryList from "../InventoryList/InventoryList.mjs";
 import * as JsxRuntime from "react/jsx-runtime";
 import * as ReservationTypeSelection from "../ReservationTypeSelection/ReservationTypeSelection.mjs";
@@ -37,34 +38,48 @@ function removeFromCart(state, id) {
 }
 
 var make = TiliaReact.leaf(function (props) {
-      var dateB = props.dateB;
-      var dateA = props.dateA;
-      var period = State.store.period;
+      var period = State.main_store.period;
       var now = new Date();
       var today = new Date(now.setHours(0.0, 0.0, 0.0, 0.0));
       var match = React.useState(function () {
-            if (dateA !== undefined) {
-              return new Date(dateA);
-            } else {
-              return today;
-            }
+            return today;
           });
       var setOpenDate = match[1];
       var openDate = match[0];
       var match$1 = React.useState(function () {
-            if (dateB !== undefined) {
-              return new Date(dateB);
-            } else {
-              return openDate;
-            }
+            return today;
           });
       var setCloseDate = match$1[1];
       var closeDate = match$1[0];
+      React.useEffect((function () {
+              console.log("Open Date:");
+              console.log(openDate);
+              console.log("Close Date:");
+              console.log(closeDate);
+              return (function () {
+                        
+                      });
+            }), [
+            openDate,
+            closeDate
+          ]);
       var updateOpenDate = function (openDate) {
-        setOpenDate(openDate);
+        setOpenDate(function (_prev) {
+              if (openDate === null || openDate === undefined) {
+                return today;
+              } else {
+                return openDate;
+              }
+            });
       };
-      var updateCloseDate = function (closeDate) {
-        setCloseDate(closeDate);
+      var updateCloseDate = function (openDate) {
+        setCloseDate(function (_prev) {
+              if (openDate === null || openDate === undefined) {
+                return today;
+              } else {
+                return openDate;
+              }
+            });
       };
       var match$2 = React.useReducer((function (state, action) {
               console.log("calling reducer");
@@ -166,8 +181,8 @@ var make = TiliaReact.leaf(function (props) {
                           children: JsxRuntime.jsxs(Cart.DispatchContext.Provider.make, {
                                 children: [
                                   JsxRuntime.jsx(InventoryList.make, {
-                                        openDate: openDate,
-                                        closeDate: closeDate,
+                                        openDate: Caml_option.some(openDate),
+                                        closeDate: Caml_option.some(closeDate),
                                         activeId: props.activeId
                                       }),
                                   JsxRuntime.jsx(Cart.make, {

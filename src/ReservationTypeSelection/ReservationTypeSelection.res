@@ -1,3 +1,4 @@
+open State
 let str = React.string
 
 @react.component
@@ -16,7 +17,7 @@ let make = leaf(() => {
             Period.set(Period.Hourly)
           }
         }}
-        checked={State.store["period"] == Period.Hourly}
+        checked={main_store["period"] == Period.Hourly}
         autoComplete="off"
       />
       <span className="p-1 pl-0"> {" Per Hour"->str} </span>
@@ -34,7 +35,7 @@ let make = leaf(() => {
             Period.set(Period.Daily)
           }
         }}
-        checked={State.store["period"] == Period.Daily}
+        checked={main_store["period"] == Period.Daily}
         autoComplete="off"
       />
       <span className="p-1 pl-0"> {" Per Day"->str} </span>
