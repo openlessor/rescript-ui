@@ -14,10 +14,10 @@ let make = leaf(() => {
         onChange={e => {
           let inputEl = e->ReactEvent.Form.currentTarget
           if inputEl["checked"] == true {
-            Period.set(Period.Hourly)
+            Unit.set(Unit.Hour)
           }
         }}
-        checked={main_store["period"] == Period.Hourly}
+        checked={main_store["unit"] == Unit.Hour}
         autoComplete="off"
       />
       <span className="p-1 pl-0"> {" Per Hour"->str} </span>
@@ -32,10 +32,10 @@ let make = leaf(() => {
         onChange={e => {
           let inputEl = e->ReactEvent.Form.currentTarget
           if inputEl["checked"] == true {
-            Period.set(Period.Daily)
+            Unit.set(Unit.Day)
           }
         }}
-        checked={main_store["period"] == Period.Daily}
+        checked={main_store["unit"] == Unit.Day}
         autoComplete="off"
       />
       <span className="p-1 pl-0"> {" Per Day"->str} </span>

@@ -17,14 +17,14 @@ var make = TiliaReact.leaf(function (props) {
                                   className: "m-1",
                                   id: "type_hourly",
                                   autoComplete: "off",
-                                  checked: State.main_store.period === "Hourly",
+                                  checked: State.main_store.unit === "Hour",
                                   name: "type",
                                   type: "radio",
                                   value: "hour",
                                   onChange: (function (e) {
                                       var inputEl = e.currentTarget;
                                       if (inputEl.checked === true) {
-                                        return State.Period.set("Hourly");
+                                        return State.Unit.set("Hour");
                                       }
                                       
                                     })
@@ -42,14 +42,14 @@ var make = TiliaReact.leaf(function (props) {
                                   className: "m-1",
                                   id: "type_daily",
                                   autoComplete: "off",
-                                  checked: State.main_store.period === "Daily",
+                                  checked: State.main_store.unit === "Day",
                                   name: "type",
                                   type: "radio",
                                   value: "date",
                                   onChange: (function (e) {
                                       var inputEl = e.currentTarget;
                                       if (inputEl.checked === true) {
-                                        return State.Period.set("Daily");
+                                        return State.Unit.set("Day");
                                       }
                                       
                                     })

@@ -70,7 +70,7 @@ function InventoryItem(props) {
                                     className: "text-xs m-2"
                                   }),
                               JsxRuntime.jsx(Pricing.make, {
-                                    period_list: item.period
+                                    period_list: item.period_list
                                   })
                             ],
                             className: "flex flex-col text-align-center w-full bg-white/40 rounded-sm m-[1.5] justify-self-end"

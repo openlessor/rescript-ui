@@ -6,15 +6,15 @@ type t = {
   name: string,
   quantity: int,
   premise_id: string,
-  period: Pricing.period_list,
+  period_list: Pricing.period_list,
 }
 
 @scope("JSON") @val
 external _parseJSON: string => t = "parse"
 
 @react.component
-let make = (~item: t, ~active=?) => {
-  let {id, name, description, period} = item
+let make = (~item: t, ~_active=?) => {
+  let {id, name, description, period_list} = item
   let image = "https://placeholdr.ai/1ca27004-f6f9-413a-8dbf-6c088feabead/256/256"
   //let _dispatch = React.useContext(Cart.DispatchContext.context)
   //let cartState = React.useContext(Cart.StateContext.context)
@@ -49,7 +49,7 @@ let make = (~item: t, ~active=?) => {
         className="flex flex-col text-align-center w-full bg-white/40 rounded-sm m-[1.5] justify-self-end">
         <h2 className="text-xs"> {name->str} </h2>
         <p className="text-xs m-2"> {description->str} </p>
-        <Pricing period_list={period} />
+        <Pricing period_list={period_list} />
       </div>
     </button>
   </a>

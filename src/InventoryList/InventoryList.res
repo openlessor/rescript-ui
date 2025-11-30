@@ -13,6 +13,7 @@ let make = leaf((
   ~activeId: option<string>,
 ) => {
   let config: Premise.Config.t = main_store["config"]
+  let unit = main_store["unit"]
   let items = config.inventory
   let filterType = "all"
   let now = Js.Date.make()
@@ -35,7 +36,7 @@ let make = leaf((
     Some(() => ())
   }, [openDate, closeDate])
   let heading = {
-    if openDate != closeDate {
+    if unit != Unit.Hour && openDate != closeDate {
       // The open date and close date are at least 1 day apart
       "Showing " ++
       filterType ++
@@ -66,7 +67,7 @@ let make = leaf((
           <InventoryItem
             key={Belt.Int.toString(item.id)}
             item={item}
-            active={activeId == Some(Belt.Int.toString(item.id))}
+            _active={activeId == Some(Belt.Int.toString(item.id))}
           />,
         items,
       )->React.array}

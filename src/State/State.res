@@ -1,12 +1,12 @@
-module Period = {
+module Unit = {
   type t =
-    | Hourly
-    | Daily
-  let defaultState: t = Hourly
+    | Hour
+    | Day
+  let defaultState: t = Hour
   let (signal, set) = signal(defaultState)
 }
 
 let main_store = tilia({
   "config": Premise.state,
-  "period": Period.signal->lift,
+  "unit": Unit.signal->lift,
 })

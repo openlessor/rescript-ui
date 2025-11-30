@@ -38,7 +38,7 @@ function removeFromCart(state, id) {
 }
 
 var make = TiliaReact.leaf(function (props) {
-      var period = State.main_store.period;
+      var unit = State.main_store.unit;
       var now = new Date();
       var today = new Date(now.setHours(0.0, 0.0, 0.0, 0.0));
       var match = React.useState(function () {
@@ -168,7 +168,7 @@ var make = TiliaReact.leaf(function (props) {
                                                 })
                                           ],
                                           className: "my-auto " + (
-                                            period === "Hourly" ? "hidden" : ""
+                                            unit === "Hour" ? "hidden" : ""
                                           )
                                         })
                                   ],

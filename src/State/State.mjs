@@ -3,25 +3,25 @@
 import * as Tilia from "tilia/src/Tilia.mjs";
 import * as Premise from "./Premise.mjs";
 
-var match = Tilia.signal("Hourly");
+var match = Tilia.signal("Hour");
 
 var signal = match[0];
 
-var Period_set = match[1];
+var Unit_set = match[1];
 
-var Period = {
-  defaultState: "Hourly",
+var Unit = {
+  defaultState: "Hour",
   signal: signal,
-  set: Period_set
+  set: Unit_set
 };
 
 var main_store = Tilia.tilia({
       config: Premise.state,
-      period: Tilia.lift(signal)
+      unit: Tilia.lift(signal)
     });
 
 export {
-  Period ,
+  Unit ,
   main_store ,
 }
 /* match Not a pure module */

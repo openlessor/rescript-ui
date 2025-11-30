@@ -16,7 +16,7 @@ let removeFromCart = (state: Cart.t, id) => {
 
 @react.component
 let make = leaf((~activeId: option<string>) => {
-  let period = main_store["period"]
+  let unit = main_store["unit"]
   let now = Js.Date.make()
   let today = Js.Date.fromFloat(
     Js.Date.setHoursMSMs(now, ~hours=0.0, ~minutes=0.0, ~seconds=0.0, ~milliseconds=0.0, ()),
@@ -91,7 +91,7 @@ let make = leaf((~activeId: option<string>) => {
             selected={openDate}
           />
         </div>
-        <div className={`my-auto ${period == Period.Hourly ? "hidden" : ""}`}>
+        <div className={`my-auto ${unit == Unit.Hour ? "hidden" : ""}`}>
           <span className="align-middle text-lg">
             {"Select your reservation end date: "->str}
           </span>

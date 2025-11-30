@@ -27,6 +27,7 @@ var make = TiliaReact.leaf(function (props) {
       var closeDate = props.closeDate;
       var openDate = props.openDate;
       var config = State.main_store.config;
+      var unit = State.main_store.unit;
       var items = config.inventory;
       var filterType = "all";
       var now = new Date();
@@ -45,7 +46,7 @@ var make = TiliaReact.leaf(function (props) {
             openDate$1,
             closeDate$1
           ]);
-      var heading = Caml_obj.notequal(openDate$1, closeDate$1) ? "Showing " + filterType + " equipment available from " + openDate$1.toLocaleDateString() + " to " + closeDate$1.toLocaleDateString() : "Showing " + filterType + " equipment available " + (
+      var heading = unit !== "Hour" && Caml_obj.notequal(openDate$1, closeDate$1) ? "Showing " + filterType + " equipment available from " + openDate$1.toLocaleDateString() + " to " + closeDate$1.toLocaleDateString() : "Showing " + filterType + " equipment available " + (
           openDate$1.getTime() === today.getTime() ? "today" : openDate$1.toLocaleDateString()
         );
       return JsxRuntime.jsxs(Card.make, {
@@ -66,7 +67,7 @@ var make = TiliaReact.leaf(function (props) {
                           children: Js_array.map((function (item) {
                                   return JsxRuntime.jsx(InventoryItem.make, {
                                               item: item,
-                                              active: Caml_obj.equal(activeId, String(item.id))
+                                              _active: Caml_obj.equal(activeId, String(item.id))
                                             }, String(item.id));
                                 }), items),
                           className: "border-none shadow-none shadow-transparent m-0 p-0 place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4"
