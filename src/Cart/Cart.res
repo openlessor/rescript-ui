@@ -1,4 +1,3 @@
-open ExecutorHook
 let str = React.string
 
 type rec t = {
@@ -46,7 +45,7 @@ module StateContext = {
 let make = (~count) => {
   let cartState = React.useContext(StateContext.context)
   let _dispatch = React.useContext(DispatchContext.context)
-  let config = useExecutor()
+  let config: Premise.Config.t = Premise.state["config"]
   let _items = config.inventory
   Js.Console.log({"CartState": cartState})
 

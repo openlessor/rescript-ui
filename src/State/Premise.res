@@ -1,4 +1,4 @@
-module ExecutorConfig = {
+module Config = {
   type t = {inventory: array<InventoryItem.t>}
 
   @scope("JSON") @val
@@ -15,21 +15,21 @@ module ExecutorConfig = {
 }
 
 module SSR = {
-  let empty: ExecutorConfig.t = {inventory: []}
-  let context: React.Context.t<ExecutorConfig.t> = React.createContext(empty)
+  let empty: Config.t = {inventory: []}
+  let context: React.Context.t<Config.t> = React.createContext(empty)
 
   module Provider = {
     let provider = React.Context.provider(context)
 
     @react.component
-    let make = (~value: ExecutorConfig.t, ~children: React.element) => {
+    let make = (~value: Config.t, ~children: React.element) => {
       let element: React.element = React.createElement(provider, {value, children})
       element
     }
   }
 }
 
-let domExecutorConfig: Js.Nullable.t<ExecutorConfig.t> = %raw(
+let domExecutorConfig: Js.Nullable.t<Config.t> = %raw(
   "(typeof window !== 'undefined' ? window.__EXECUTOR_CONFIG__ ?? null : null)"
 )
 //let ctx = React.useContext(SSR.context)
@@ -39,13 +39,9 @@ let initialExecutorConfig = switch Js.Nullable.toOption(domExecutorConfig) {
 }
 // XXX: For now we hardcode the premise ID
 let premiseId = "a55351b1-1b78-4b6c-bd13-6859dc9ad410"
-let executorConfig = tilia({
+let state = tilia({
   "config": source(initialExecutorConfig, async (_prev, set) => {
-    let config = await ExecutorConfig.fetch(premiseId)
+    let config = await Config.fetch(premiseId)
     set(config)
   }),
 })
-
-let useExecutor = (): ExecutorConfig.t => {
-  executorConfig["config"]
-}

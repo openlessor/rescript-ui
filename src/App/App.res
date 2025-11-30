@@ -1,5 +1,3 @@
-open ExecutorHook
-
 let getActiveId = (url: RescriptReactRouter.url) => {
   switch url.path {
   | list{"item", id, ..._} => Some(id)
@@ -9,7 +7,7 @@ let getActiveId = (url: RescriptReactRouter.url) => {
 
 @react.component
 let make = (
-  ~initialExecutorConfig: option<ExecutorConfig.t>=?,
+  ~initialExecutorConfig: option<Premise.Config.t>=?,
   ~serverUrl: option<RescriptReactRouter.url>=?,
 ) => {
   let initialUrl = RescriptReactRouter.useUrl(~serverUrl?, ())
@@ -28,13 +26,13 @@ let make = (
 
   let executorConfigValue = switch initialExecutorConfig {
   | Some(value) => value
-  | None => ExecutorHook.SSR.empty
+  | None => Premise.SSR.empty
   }
 
-  <SSR.Provider value={executorConfigValue}>
+  <Premise.SSR.Provider value={executorConfigValue}>
     {switch url.path {
     | list{"item", ..._} | list{} => <Landing activeId={activeId} />
     | _ => <ErrorView />
     }}
-  </SSR.Provider>
+  </Premise.SSR.Provider>
 }

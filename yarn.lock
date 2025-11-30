@@ -2789,7 +2789,7 @@ __metadata:
     react: "npm:^19.2.0"
     react-datepicker: "npm:^4.7.0"
     react-dom: "npm:^19.2.0"
-    rescript: "npm:^11"
+    rescript: "npm:^11.0.0"
     rescript-classnames: "npm:^7.0.1"
     tailwindcss: "npm:^4.1.17"
     tilia: "npm:4.0.0-beta.20251117T181544"
@@ -2806,7 +2806,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rescript@npm:^11":
+"rescript@npm:^11.0.0":
   version: 11.1.4
   resolution: "rescript@npm:11.1.4"
   bin:

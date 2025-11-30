@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import * as Landing from "../Landing/Landing.mjs";
+import * as Premise from "../State/Premise.mjs";
 import * as ErrorView from "../ErrorView/ErrorView.mjs";
-import * as ExecutorHook from "../ExecutorHook/ExecutorHook.mjs";
 import * as JsxRuntime from "react/jsx-runtime";
 import * as RescriptReactRouter from "@rescript/react/src/RescriptReactRouter.mjs";
 
@@ -49,13 +49,13 @@ function App(props) {
                     RescriptReactRouter.unwatchUrl(watcherID);
                   });
         }), []);
-  var executorConfigValue = initialExecutorConfig !== undefined ? initialExecutorConfig : ExecutorHook.SSR.empty;
+  var executorConfigValue = initialExecutorConfig !== undefined ? initialExecutorConfig : Premise.SSR.empty;
   var match$2 = url.path;
   var tmp;
   tmp = match$2 && match$2.hd !== "item" ? JsxRuntime.jsx(ErrorView.make, {}) : JsxRuntime.jsx(Landing.make, {
           activeId: activeId
         });
-  return JsxRuntime.jsx(ExecutorHook.SSR.Provider.make, {
+  return JsxRuntime.jsx(Premise.SSR.Provider.make, {
               value: executorConfigValue,
               children: tmp
             });

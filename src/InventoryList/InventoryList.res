@@ -1,4 +1,3 @@
-open ExecutorHook
 let str = React.string
 
 module IntCmp = Belt.Id.MakeComparable({
@@ -8,13 +7,12 @@ module IntCmp = Belt.Id.MakeComparable({
 
 @react.component
 let make = leaf((~openDate, ~closeDate, ~activeId: option<string>) => {
-  let config: ExecutorConfig.t = useExecutor()
+  let config: Premise.Config.t = Premise.state["config"]
   let items = config.inventory
   let filterType = "all"
   let now = Js.Date.make()
-  let today = Js.Date.fromFloat(
-    Js.Date.setHoursMSMs(now, ~hours=0.0, ~minutes=0.0, ~seconds=0.0, ~milliseconds=0.0, ()),
-  )
+  let today = Js.Date.fromFloat(Js.Date.setHoursMSMs(now, ~hours=0.0, ~minutes=0.0, ~seconds=0.0, ~milliseconds=0.0, ()))
+
 
   let heading = {
     if Js.Date.getTime(openDate) != Js.Date.getTime(closeDate) {

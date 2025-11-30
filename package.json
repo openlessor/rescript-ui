@@ -38,7 +38,7 @@
   "devDependencies": {
     "@faker-js/faker": "^6.0.0-alpha.7",
     "autoprefixer": "^10.3.7",
-    "rescript": "^11",
+    "rescript": "^11.0.0",
     "tailwindcss": "^4.1.17"
   },
   "packageManager": "yarn@4.11.0"

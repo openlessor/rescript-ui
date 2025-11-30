@@ -18,7 +18,7 @@ var context = React.createContext(empty);
 
 var provider = context.Provider;
 
-function ExecutorHook$SSR$Provider(props) {
+function Premise$SSR$Provider(props) {
   return React.createElement(provider, {
               value: props.value,
               children: props.children
@@ -29,23 +29,19 @@ var domExecutorConfig = ((typeof window !== 'undefined' ? window.__EXECUTOR_CONF
 
 var initialExecutorConfig = (domExecutorConfig == null) ? empty : domExecutorConfig;
 
-var executorConfig = Tilia.tilia({
+var state = Tilia.tilia({
       config: Tilia.source(initialExecutorConfig, (async function (_prev, set) {
               var config = await $$fetch$1("a55351b1-1b78-4b6c-bd13-6859dc9ad410");
               return set(config);
             }))
     });
 
-function useExecutor() {
-  return executorConfig.config;
-}
-
-var ExecutorConfig = {
+var Config = {
   $$fetch: $$fetch$1
 };
 
 var SSR_Provider = {
-  make: ExecutorHook$SSR$Provider
+  make: Premise$SSR$Provider
 };
 
 var SSR = {
@@ -55,8 +51,8 @@ var SSR = {
 };
 
 export {
-  ExecutorConfig ,
+  Config ,
   SSR ,
-  useExecutor ,
+  state ,
 }
 /* context Not a pure module */
