@@ -72,12 +72,12 @@ var make = TiliaReact.leaf(function (props) {
               }
             });
       };
-      var updateCloseDate = function (openDate) {
+      var updateCloseDate = function (closeDate) {
         setCloseDate(function (_prev) {
-              if (openDate === null || openDate === undefined) {
+              if (closeDate === null || closeDate === undefined) {
                 return today;
               } else {
-                return openDate;
+                return closeDate;
               }
             });
       };

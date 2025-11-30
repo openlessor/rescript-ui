@@ -41,9 +41,9 @@ let make = leaf((~activeId: option<string>) => {
     )
     //setCloseDate(openDate)
   }
-  let updateCloseDate = (openDate: Js.Nullable.t<Js.Date.t>) => {
+  let updateCloseDate = (closeDate: Js.Nullable.t<Js.Date.t>) => {
     setCloseDate(_prev =>
-      switch openDate {
+      switch closeDate {
       | Js.Nullable.Value(date) => date
       | _ => today
       }
