@@ -29,8 +29,8 @@ var make = TiliaReact.leaf(function (props) {
       var filterType = "all";
       var now = new Date();
       var today = new Date(now.setHours(0.0, 0.0, 0.0, 0.0));
-      var heading = today.getTime() === openDate.getTime() ? "Showing " + filterType + " equipment available today" : (
-          openDate.getTime() === closeDate.getTime() ? "Showing " + filterType + " equipment available on " + openDate.toLocaleDateString() : "Showing " + filterType + " equipment available from " + openDate.toLocaleDateString() + " to " + closeDate.toLocaleDateString()
+      var heading = openDate.getTime() !== closeDate.getTime() ? "Showing " + filterType + " equipment available from " + openDate.toLocaleDateString() + " to " + closeDate.toLocaleDateString() : "Showing " + filterType + " equipment available " + (
+          openDate.getTime() === today.getTime() ? "today" : openDate.toLocaleDateString()
         );
       return JsxRuntime.jsxs(Card.make, {
                   children: [

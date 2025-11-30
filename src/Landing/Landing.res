@@ -14,7 +14,8 @@ let removeFromCart = (state: Cart.t, id) => {
 }
 
 @react.component
-let make = (~dateA=?, ~dateB=?, ~activeId: option<string>) => {
+let make = leaf((~dateA=?, ~dateB=?, ~activeId: option<string>) => {
+  let reservation_type = ReservationTypeSelection.State.state.value
   let now = Js.Date.make()
   let today = Js.Date.fromFloat(
     Js.Date.setHoursMSMs(now, ~hours=0.0, ~minutes=0.0, ~seconds=0.0, ~milliseconds=0.0, ()),
@@ -32,9 +33,12 @@ let make = (~dateA=?, ~dateB=?, ~activeId: option<string>) => {
     | None => openDate
     }
   )
-  let updateDate = openDate => {
+  let updateOpenDate = openDate => {
     setOpenDate(openDate)
-    setCloseDate(openDate)
+    //setCloseDate(openDate)
+  }
+  let updateCloseDate = closeDate => {
+    setCloseDate(closeDate)
   }
 
   let (state, dispatch) = React.useReducer((state, action) => {
@@ -53,28 +57,49 @@ let make = (~dateA=?, ~dateB=?, ~activeId: option<string>) => {
     <Card className="bg-slate-200/40 border-slate-200/40 border-1 text-center">
       <h1 className="text-xl">
         <span>
-          <Icon.MonitorCloud size={32} className="mr-2 my-auto inline content-start" />{"Cloud Hardware Rental"->str}
+          <Icon.MonitorCloud size={32} className="mr-2 my-auto inline content-start" />
+          {"Cloud Hardware Rental"->str}
         </span>
       </h1>
     </Card>
     <Card className="grid grid-cols-[auto_1fr] auto-cols-auto bg-white/20">
-      <span className="m-2 align-middle text-lg">
-        <Icon.Calendar size={32} className="mr-2 my-auto inline content-start" />{"Select your reservation start date: "->str}
-      </span>
-      <div className="my-auto">
-        <DatePicker
-          minDate={today}
-          onChange={updateDate}
-          isOpen={false}
-          className="m-2 block align-middle content-center"
-          calendarClassName="bg-white"
-          selected={openDate}
-        />
-      </div>
+      <span className="m-2 align-middle text-lg"> {"Select your reservation type: "->str} </span>
+      <ReservationTypeSelection />
     </Card>
     <Card className="grid grid-cols-[auto_1fr] auto-cols-auto bg-white/20">
-      <span className="m-2 align-middle text-lg">{"Select your reservation type: "->str}</span>
-      <ReservationTypeSelection />
+      <Icon.Calendar size={48} className="mr-2 my-auto inline content-start" />
+      <div className="grid rows-auto-rows">
+        <div className="my-auto">
+          <span className="align-middle text-lg">
+            {"Select your reservation start date: "->str}
+          </span>
+          <DatePicker
+            minDate={today}
+            onChange={updateOpenDate}
+            isOpen={false}
+            className="block align-end outline-slate-400 outline-1 px-2"
+            calendarClassName="bg-white"
+            selected={openDate}
+          />
+        </div>
+        <div
+          className={`my-auto ${reservation_type == ReservationTypeSelection.State.Hourly
+              ? "hidden"
+              : ""}`}>
+          <span className="align-middle text-lg">
+            {"Select your reservation end date: "->str}
+          </span>
+          <DatePicker
+            minDate={openDate}
+            selected={closeDate}
+            onChange={updateCloseDate}
+            isOpen={false}
+            className="block align-end outline-slate-400 outline-1 px-2"
+            calendarClassName="bg-white"
+            //selected={}
+          />
+        </div>
+      </div>
     </Card>
     <Cart.StateContext.Provider value={state}>
       <Cart.DispatchContext.Provider value={dispatch}>
@@ -89,4 +114,4 @@ let make = (~dateA=?, ~dateB=?, ~activeId: option<string>) => {
       </button>
     </div>
   </Container>
-}
+})

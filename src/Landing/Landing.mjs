@@ -8,6 +8,7 @@ import * as Js_array from "rescript/lib/es6/js_array.js";
 import * as Container from "../Ui/Container.mjs";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 import * as DatePicker from "../DatePicker/DatePicker.mjs";
+import * as TiliaReact from "@tilia/react/src/TiliaReact.mjs";
 import * as InventoryList from "../InventoryList/InventoryList.mjs";
 import * as JsxRuntime from "react/jsx-runtime";
 import * as ReservationTypeSelection from "../ReservationTypeSelection/ReservationTypeSelection.mjs";
@@ -34,132 +35,158 @@ function removeFromCart(state, id) {
         };
 }
 
-function Landing(props) {
-  var dateB = props.dateB;
-  var dateA = props.dateA;
-  var now = new Date();
-  var today = new Date(now.setHours(0.0, 0.0, 0.0, 0.0));
-  var match = React.useState(function () {
-        if (dateA !== undefined) {
-          return new Date(dateA);
-        } else {
-          return today;
-        }
-      });
-  var setOpenDate = match[1];
-  var openDate = match[0];
-  var match$1 = React.useState(function () {
-        if (dateB !== undefined) {
-          return new Date(dateB);
-        } else {
-          return openDate;
-        }
-      });
-  var setCloseDate = match$1[1];
-  var updateDate = function (openDate) {
-    setOpenDate(openDate);
-    setCloseDate(openDate);
-  };
-  var match$2 = React.useReducer((function (state, action) {
-          console.log("calling reducer");
-          console.log({
-                state: state,
-                action: action
-              });
-          var result;
-          result = action.TAG === "AddToCart" ? addToCart(state, action.id) : removeFromCart(state, action.id);
-          console.log({
-                nextState: result
-              });
-          return result;
-        }), {
-        cart: [],
-        selected_item: undefined,
-        items: []
-      });
-  var state = match$2[0];
-  var cartCount = state.cart.length;
-  return JsxRuntime.jsxs(Container.make, {
-              children: [
-                JsxRuntime.jsx(Card.make, {
-                      children: JsxRuntime.jsx("h1", {
-                            children: JsxRuntime.jsxs("span", {
-                                  children: [
-                                    JsxRuntime.jsx(Icon.MonitorCloud.make, {
-                                          size: 32,
-                                          className: "mr-2 my-auto inline content-start"
-                                        }),
-                                    "Cloud Hardware Rental"
-                                  ]
-                                }),
-                            className: "text-xl"
-                          }),
-                      className: "bg-slate-200/40 border-slate-200/40 border-1 text-center"
-                    }),
-                JsxRuntime.jsxs(Card.make, {
-                      children: [
-                        JsxRuntime.jsxs("span", {
-                              children: [
-                                JsxRuntime.jsx(Icon.Calendar.make, {
-                                      size: 32,
-                                      className: "mr-2 my-auto inline content-start"
+var make = TiliaReact.leaf(function (props) {
+      var dateB = props.dateB;
+      var dateA = props.dateA;
+      var reservation_type = ReservationTypeSelection.State.state.value;
+      var now = new Date();
+      var today = new Date(now.setHours(0.0, 0.0, 0.0, 0.0));
+      var match = React.useState(function () {
+            if (dateA !== undefined) {
+              return new Date(dateA);
+            } else {
+              return today;
+            }
+          });
+      var setOpenDate = match[1];
+      var openDate = match[0];
+      var match$1 = React.useState(function () {
+            if (dateB !== undefined) {
+              return new Date(dateB);
+            } else {
+              return openDate;
+            }
+          });
+      var setCloseDate = match$1[1];
+      var closeDate = match$1[0];
+      var updateOpenDate = function (openDate) {
+        setOpenDate(openDate);
+      };
+      var updateCloseDate = function (closeDate) {
+        setCloseDate(closeDate);
+      };
+      var match$2 = React.useReducer((function (state, action) {
+              console.log("calling reducer");
+              console.log({
+                    state: state,
+                    action: action
+                  });
+              var result;
+              result = action.TAG === "AddToCart" ? addToCart(state, action.id) : removeFromCart(state, action.id);
+              console.log({
+                    nextState: result
+                  });
+              return result;
+            }), {
+            cart: [],
+            selected_item: undefined,
+            items: []
+          });
+      var state = match$2[0];
+      var cartCount = state.cart.length;
+      return JsxRuntime.jsxs(Container.make, {
+                  children: [
+                    JsxRuntime.jsx(Card.make, {
+                          children: JsxRuntime.jsx("h1", {
+                                children: JsxRuntime.jsxs("span", {
+                                      children: [
+                                        JsxRuntime.jsx(Icon.MonitorCloud.make, {
+                                              size: 32,
+                                              className: "mr-2 my-auto inline content-start"
+                                            }),
+                                        "Cloud Hardware Rental"
+                                      ]
                                     }),
-                                "Select your reservation start date: "
-                              ],
-                              className: "m-2 align-middle text-lg"
-                            }),
-                        JsxRuntime.jsx("div", {
-                              children: JsxRuntime.jsx(DatePicker.make, {
-                                    calendarClassName: "bg-white",
-                                    className: "m-2 block align-middle content-center",
-                                    isOpen: false,
-                                    minDate: today,
-                                    onChange: updateDate,
-                                    selected: openDate
-                                  }),
-                              className: "my-auto"
-                            })
-                      ],
-                      className: "grid grid-cols-[auto_1fr] auto-cols-auto bg-white/20"
-                    }),
-                JsxRuntime.jsxs(Card.make, {
-                      children: [
-                        JsxRuntime.jsx("span", {
-                              children: "Select your reservation type: ",
-                              className: "m-2 align-middle text-lg"
-                            }),
-                        JsxRuntime.jsx(ReservationTypeSelection.make, {})
-                      ],
-                      className: "grid grid-cols-[auto_1fr] auto-cols-auto bg-white/20"
-                    }),
-                JsxRuntime.jsx(Cart.StateContext.Provider.make, {
-                      children: JsxRuntime.jsxs(Cart.DispatchContext.Provider.make, {
-                            children: [
-                              JsxRuntime.jsx(InventoryList.make, {
-                                    openDate: openDate,
-                                    closeDate: match$1[0],
-                                    activeId: props.activeId
-                                  }),
-                              JsxRuntime.jsx(Cart.make, {
-                                    count: cartCount
-                                  })
-                            ],
-                            value: match$2[1]
-                          }),
-                      value: state
-                    }),
-                JsxRuntime.jsx("div", {
-                      children: JsxRuntime.jsx("button", {
-                            children: "Book Reservation",
-                            className: "mx-auto mt-4 bg-slate-500 hover:bg-slate-700 text-white py-2 px-4 rounded-sm"
-                          }),
-                      className: "w-full"
-                    })
-              ]
-            });
-}
-
-var make = Landing;
+                                className: "text-xl"
+                              }),
+                          className: "bg-slate-200/40 border-slate-200/40 border-1 text-center"
+                        }),
+                    JsxRuntime.jsxs(Card.make, {
+                          children: [
+                            JsxRuntime.jsx("span", {
+                                  children: "Select your reservation type: ",
+                                  className: "m-2 align-middle text-lg"
+                                }),
+                            JsxRuntime.jsx(ReservationTypeSelection.make, {})
+                          ],
+                          className: "grid grid-cols-[auto_1fr] auto-cols-auto bg-white/20"
+                        }),
+                    JsxRuntime.jsxs(Card.make, {
+                          children: [
+                            JsxRuntime.jsx(Icon.Calendar.make, {
+                                  size: 48,
+                                  className: "mr-2 my-auto inline content-start"
+                                }),
+                            JsxRuntime.jsxs("div", {
+                                  children: [
+                                    JsxRuntime.jsxs("div", {
+                                          children: [
+                                            JsxRuntime.jsx("span", {
+                                                  children: "Select your reservation start date: ",
+                                                  className: "align-middle text-lg"
+                                                }),
+                                            JsxRuntime.jsx(DatePicker.make, {
+                                                  calendarClassName: "bg-white",
+                                                  className: "block align-end outline-slate-400 outline-1 px-2",
+                                                  isOpen: false,
+                                                  minDate: today,
+                                                  onChange: updateOpenDate,
+                                                  selected: openDate
+                                                })
+                                          ],
+                                          className: "my-auto"
+                                        }),
+                                    JsxRuntime.jsxs("div", {
+                                          children: [
+                                            JsxRuntime.jsx("span", {
+                                                  children: "Select your reservation end date: ",
+                                                  className: "align-middle text-lg"
+                                                }),
+                                            JsxRuntime.jsx(DatePicker.make, {
+                                                  calendarClassName: "bg-white",
+                                                  className: "block align-end outline-slate-400 outline-1 px-2",
+                                                  isOpen: false,
+                                                  minDate: openDate,
+                                                  onChange: updateCloseDate,
+                                                  selected: closeDate
+                                                })
+                                          ],
+                                          className: "my-auto " + (
+                                            reservation_type === "Hourly" ? "hidden" : ""
+                                          )
+                                        })
+                                  ],
+                                  className: "grid rows-auto-rows"
+                                })
+                          ],
+                          className: "grid grid-cols-[auto_1fr] auto-cols-auto bg-white/20"
+                        }),
+                    JsxRuntime.jsx(Cart.StateContext.Provider.make, {
+                          children: JsxRuntime.jsxs(Cart.DispatchContext.Provider.make, {
+                                children: [
+                                  JsxRuntime.jsx(InventoryList.make, {
+                                        openDate: openDate,
+                                        closeDate: closeDate,
+                                        activeId: props.activeId
+                                      }),
+                                  JsxRuntime.jsx(Cart.make, {
+                                        count: cartCount
+                                      })
+                                ],
+                                value: match$2[1]
+                              }),
+                          value: state
+                        }),
+                    JsxRuntime.jsx("div", {
+                          children: JsxRuntime.jsx("button", {
+                                children: "Book Reservation",
+                                className: "mx-auto mt-4 bg-slate-500 hover:bg-slate-700 text-white py-2 px-4 rounded-sm"
+                              }),
+                          className: "w-full"
+                        })
+                  ]
+                });
+    });
 
 export {
   str ,
@@ -167,4 +194,4 @@ export {
   removeFromCart ,
   make ,
 }
-/* Card Not a pure module */
+/* make Not a pure module */

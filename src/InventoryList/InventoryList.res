@@ -17,12 +17,7 @@ let make = leaf((~openDate, ~closeDate, ~activeId: option<string>) => {
   )
 
   let heading = {
-    if Js.Date.getTime(today) == Js.Date.getTime(openDate) {
-      "Showing " ++ filterType ++ " equipment available today"
-    } else if Js.Date.getTime(openDate) == Js.Date.getTime(closeDate) {
-      // There is no close date selected and the reservation date is not today
-      "Showing " ++ filterType ++ " equipment available on " ++ Js.Date.toLocaleDateString(openDate)
-    } else {
+    if Js.Date.getTime(openDate) != Js.Date.getTime(closeDate) {
       // The open date and close date are at least 1 day apart
       "Showing " ++
       filterType ++
@@ -30,14 +25,24 @@ let make = leaf((~openDate, ~closeDate, ~activeId: option<string>) => {
       Js.Date.toLocaleDateString(openDate) ++
       " to " ++
       Js.Date.toLocaleDateString(closeDate)
+    } else {
+      "Showing " ++
+      filterType ++
+      " equipment available " ++
+      switch Js.Date.getTime(openDate) == Js.Date.getTime(today) {
+      | true => "today"
+      | false => Js.Date.toLocaleDateString(openDate)
+      }
     }
   }
 
   <Card className="m-0 p-0 bg-white/30 border-2 border-b-4 border-r-4 border-gray-200/60">
     <h1 className="block align-middle text-lg content-center">
-      <Icon.SearchIcon className="inline" /><span className="align-middle">{heading->str}</span>
+      <Icon.SearchIcon className="inline" />
+      <span className="align-middle"> {heading->str} </span>
     </h1>
-    <Card className="border-none shadow-none shadow-transparent m-0 p-0 place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4">
+    <Card
+      className="border-none shadow-none shadow-transparent m-0 p-0 place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4">
       {Js.Array.map(
         (item: InventoryItem.t) =>
           <InventoryItem
