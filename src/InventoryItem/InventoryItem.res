@@ -5,7 +5,8 @@ type t = {
   id: int,
   name: string,
   quantity: int,
-  premiseid: string,
+  premise_id: string,
+  period: Pricing.period_list,
 }
 
 @scope("JSON") @val
@@ -13,7 +14,7 @@ external _parseJSON: string => t = "parse"
 
 @react.component
 let make = (~item: t, ~active=?) => {
-  let {id, name, description} = item
+  let {id, name, description, period} = item
   let image = "https://placeholdr.ai/1ca27004-f6f9-413a-8dbf-6c088feabead/256/256"
   //let _dispatch = React.useContext(Cart.DispatchContext.context)
   //let cartState = React.useContext(Cart.StateContext.context)
@@ -30,7 +31,7 @@ let make = (~item: t, ~active=?) => {
     }}
     href={"/item/" ++ Belt.Int.toString(id)}
     className="block">
-    <button className="relative m-[1.5] flex flex-col">
+    <button className="relative m-[1.5] flex flex-col  max-w-40">
       <div className="rounded-sm border-2 shadow-sm m-0 p-0">
         <img className="p-[1.5] w-40 h-40" src={image} style={Obj.magic({"width": "100%"})} />
       </div>
@@ -45,11 +46,10 @@ let make = (~item: t, ~active=?) => {
         </span>
       </div>
       <div
-        className="flex flex-col text-align-center w-full bg-white text-gray-300 rounded-sm m-[1.5] justify-self-end">
-        <h2 className="text-xs drop-shadow-sm text-gray-500"> {name->str} </h2>
-        <p className={(active == Some(true) ? "" : "hidden ") ++ "text-xs m-2"}>
-          {description->str}
-        </p>
+        className="flex flex-col text-align-center w-full bg-white/40 rounded-sm m-[1.5] justify-self-end">
+        <h2 className="text-xs"> {name->str} </h2>
+        <p className="text-xs m-2"> {description->str} </p>
+        <Pricing period_list={period} />
       </div>
     </button>
   </a>
