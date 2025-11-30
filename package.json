@@ -26,9 +26,11 @@
     "@vitejs/plugin-react": "^5.1.1",
     "compression": "^1.7.4",
     "express": "^4.19.2",
+    "lucide-react": "^0.555.0",
     "react": "^19.2.0",
     "react-datepicker": "^4.7.0",
     "react-dom": "^19.2.0",
+    "rescript-classnames": "^7.0.1",
     "tilia": "4.0.0-beta.20251117T181544",
     "vite": "^7.2.2"
   },

@@ -8,7 +8,7 @@ import * as RescriptReactRouter from "@rescript/react/src/RescriptReactRouter.mj
 
 function render(url) {
   var appUrl = RescriptReactRouter.dangerouslyGetInitialUrl(url, undefined);
-  return ExecutorHook.ExecutorConfig.$$fetch("0e36f6ba-ac5d-423e-a3bb-bb939e1cb326").then(function (config) {
+  return ExecutorHook.ExecutorConfig.$$fetch("a55351b1-1b78-4b6c-bd13-6859dc9ad410").then(function (config) {
               return Promise.resolve({
                           executorConfig: config,
                           html: Server.renderToString(JsxRuntime.jsx(App.make, {

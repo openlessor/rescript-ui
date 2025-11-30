@@ -3,8 +3,8 @@
 import * as Tilia from "tilia/src/Tilia.mjs";
 import * as React from "react";
 
-async function $$fetch$1(tenantId) {
-  var response = await fetch("http://localhost:5173/api/config/" + tenantId, {
+async function $$fetch$1(premiseId) {
+  var response = await fetch("http://localhost:5173/api/config/" + premiseId, {
         method: "GET"
       });
   return JSON.parse(await response.text());
@@ -31,7 +31,7 @@ var initialExecutorConfig = (domExecutorConfig == null) ? empty : domExecutorCon
 
 var executorConfig = Tilia.tilia({
       config: Tilia.source(initialExecutorConfig, (async function (_prev, set) {
-              var config = await $$fetch$1("0e36f6ba-ac5d-423e-a3bb-bb939e1cb326");
+              var config = await $$fetch$1("a55351b1-1b78-4b6c-bd13-6859dc9ad410");
               return set(config);
             }))
     });

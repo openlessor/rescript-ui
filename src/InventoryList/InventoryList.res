@@ -33,15 +33,11 @@ let make = leaf((~openDate, ~closeDate, ~activeId: option<string>) => {
     }
   }
 
-  <div className="m-4 px-1 py-1">
-    <h1 className="block font-bold align-middle text-gray-700 text-base m-2 text-3xl">
-      <span className="m-2 align-middle text-3xl font-light">
-        <i className="light-icon-search" />
-      </span>
-      {"Available equipment"->str}
-      <span className="m-4 text-gray-500 text-lg shadow-lg"> {heading->str} </span>
+  <Card className="m-0 p-0 bg-white/30 border-2 border-b-4 border-r-4 border-gray-200/60">
+    <h1 className="block align-middle text-lg content-center">
+      <Icon.SearchIcon className="inline" /><span className="align-middle">{heading->str}</span>
     </h1>
-    <div className="place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4">
+    <Card className="border-none shadow-none shadow-transparent m-0 p-0 place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4">
       {Js.Array.map(
         (item: InventoryItem.t) =>
           <InventoryItem
@@ -51,6 +47,6 @@ let make = leaf((~openDate, ~closeDate, ~activeId: option<string>) => {
           />,
         items,
       )->React.array}
-    </div>
-  </div>
+    </Card>
+  </Card>
 })

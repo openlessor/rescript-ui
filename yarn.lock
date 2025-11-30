@@ -577,6 +577,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rescript/core@npm:1.3.0":
+  version: 1.3.0
+  resolution: "@rescript/core@npm:1.3.0"
+  peerDependencies:
+    rescript: ^11.1.0-rc.7
+  checksum: 10c0/c8315d6d29fed6335961a4fee23874f7aea59f4146226717ecf328dd451726957f22b22ecfd7d47985cdcdb2673407882e09500e013c9ed4873fe7e5f6a5a987
+  languageName: node
+  linkType: hard
+
 "@rescript/core@npm:^1.6.1":
   version: 1.6.1
   resolution: "@rescript/core@npm:1.6.1"
@@ -2189,6 +2198,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lucide-react@npm:^0.555.0":
+  version: 0.555.0
+  resolution: "lucide-react@npm:0.555.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/18f0870307fe2a37cf62473de88845a78107295de1efcf599a8662be3af4239c0b661a57f8e29815e424773e4aad04d199ad4d94d7ae977b7ce7a61be7f64e04
+  languageName: node
+  linkType: hard
+
 "magic-string@npm:^0.30.21":
   version: 0.30.21
   resolution: "magic-string@npm:0.30.21"
@@ -2759,15 +2777,26 @@ __metadata:
     autoprefixer: "npm:^10.3.7"
     compression: "npm:^1.7.4"
     express: "npm:^4.19.2"
+    lucide-react: "npm:^0.555.0"
     react: "npm:^19.2.0"
     react-datepicker: "npm:^4.7.0"
     react-dom: "npm:^19.2.0"
     rescript: "npm:^11"
+    rescript-classnames: "npm:^7.0.1"
     tailwindcss: "npm:^4.1.17"
     tilia: "npm:4.0.0-beta.20251117T181544"
     vite: "npm:^7.2.2"
   languageName: unknown
   linkType: soft
+
+"rescript-classnames@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "rescript-classnames@npm:7.0.1"
+  dependencies:
+    "@rescript/core": "npm:1.3.0"
+  checksum: 10c0/204fea6952cd20b5efc23a60bb35ae5e60e6f4d616443eb08f5f1e60a5d0307ea1db9486fcde82c26aaec2cbe383e0b3196b48d694ba8539da0f77e09ec6967a
+  languageName: node
+  linkType: hard
 
 "rescript@npm:^11":
   version: 11.1.4

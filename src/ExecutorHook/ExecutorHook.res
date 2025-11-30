@@ -3,16 +3,13 @@ module ExecutorConfig = {
 
   @scope("JSON") @val
   external parseJSON: string => t = "parse"
-  /**
-❯ curl http://localhost:54432/config/0e36f6ba-ac5d-423e-a3bb-bb939e1cb326
-{"inventory":[{"id":1,"name":"test inventory","description":"testing","quantity":0,"tenantid":"0e36f6ba-ac5d-423e-a3bb-bb939e1cb326"}],"tenant":{"id":"0e36f6ba-ac5d-423e-a3bb-bb939e1cb326","name":"Example Tenant","description":"An example tenant"}}%
-**/
+
   // XXX @todo Make this base URL configurable from an env var
   // window.location.origin is not SSR friendly
   let base_url: string = "http://localhost:5173/api"
-  let fetch = async (tenantId: string) => {
+  let fetch = async (premiseId: string) => {
     open Fetch
-    let response = await fetch(`${base_url}/config/${tenantId}`, {method: #GET})
+    let response = await fetch(`${base_url}/config/${premiseId}`, {method: #GET})
     parseJSON(await response->Response.text)
   }
 }
@@ -40,11 +37,11 @@ let initialExecutorConfig = switch Js.Nullable.toOption(domExecutorConfig) {
 | Some(config) => config
 | None => SSR.empty
 }
-// XXX: For now we hardcode the tenant ID
-let tenantId = "0e36f6ba-ac5d-423e-a3bb-bb939e1cb326"
+// XXX: For now we hardcode the premise ID
+let premiseId = "a55351b1-1b78-4b6c-bd13-6859dc9ad410"
 let executorConfig = tilia({
   "config": source(initialExecutorConfig, async (_prev, set) => {
-    let config = await ExecutorConfig.fetch(tenantId)
+    let config = await ExecutorConfig.fetch(premiseId)
     set(config)
   }),
 })

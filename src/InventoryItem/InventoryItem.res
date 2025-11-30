@@ -5,7 +5,7 @@ type t = {
   id: int,
   name: string,
   quantity: int,
-  tenantid: string,
+  premiseid: string,
 }
 
 @scope("JSON") @val

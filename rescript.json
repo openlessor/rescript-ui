@@ -17,7 +17,8 @@
     "@rescript/react",
     "@glennsl/rescript-fetch",
     "tilia",
-    "@tilia/react"
+    "@tilia/react",
+    "rescript-classnames"
   ],
   "bs-dev-dependencies": [],
   "bsc-flags": ["-open RescriptCore", "-open Tilia", "-open TiliaReact"]
