@@ -17,6 +17,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
     "@glennsl/rescript-fetch": "^0.2.3",
     "@jihchi/vite-plugin-rescript": "^7.1.0",
     "@rescript/core": "^1.6.1",
