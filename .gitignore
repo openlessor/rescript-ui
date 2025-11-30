@@ -1,3 +1,4 @@
+.env
 .tailwind_ppx_cache
 dist
 .cache
