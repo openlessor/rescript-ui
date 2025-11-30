@@ -1,5 +1,11 @@
 # OpenLessor POC
 
+## Prototype Phase
+
+This software is currently in the prototype phase and is not ready to be used in production. The software design, APIs, and database schemas may completely change by a beta release.
+
+## Preamble
+
 Written using ReScript and React. This is a work in progress. In it's current state, it should not be used by anyone. Any or all of this document is subject to change. 
 
 ## Running the frontend POC
