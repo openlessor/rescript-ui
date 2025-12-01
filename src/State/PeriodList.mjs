@@ -3,9 +3,11 @@
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 
-function computeState(config) {
+function deriveState(store) {
   var seen_units = new Set();
-  return Belt_Array.flatMap(config.inventory, (function (inv) {
+  var config = store.config;
+  var inventory = config.inventory.slice(0);
+  return Belt_Array.flatMap(inventory, (function (inv) {
                     return inv.period_list.map(function (pl) {
                                 if (seen_units.has(pl.unit)) {
                                   return ;
@@ -22,6 +24,6 @@ function computeState(config) {
 }
 
 export {
-  computeState ,
+  deriveState ,
 }
 /* No side effect */

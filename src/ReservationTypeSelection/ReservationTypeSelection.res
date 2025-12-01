@@ -4,7 +4,7 @@ let str = React.string
 @react.component
 let make = leaf(() => {
   <div className="my-auto">
-    {period_list
+    {main_store["period_list"]
     ->Js.Array2.map(period => {
       <label className="block" key={period["unit"]} htmlFor={`type_${period["unit"]}`}>
         <input

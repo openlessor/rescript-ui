@@ -1,8 +1,10 @@
 // I had trouble deriving the state in TiliaJS, so as a woarkaround I just pass the value directly into this function.
 
-let computeState = (config: Premise.Config.t) => {
+let deriveState = store => {
   let seen_units = Set.make()
-  config.inventory
+  let config: Premise.Config.t = store["config"]
+  let inventory = config.inventory->Belt.Array.copy
+  inventory
   ->Belt.Array.flatMap(inv => {
     inv.period_list->Js.Array2.map((pl: Pricing.period) => {
       if seen_units->Set.has(pl["unit"]) {

@@ -16,16 +16,18 @@ var Unit = {
   set: Unit_set
 };
 
-var main_store = Tilia.tilia({
-      config: Premise.state,
-      unit: Tilia.lift(signal)
+var main_store = Tilia.carve(function (param) {
+      return {
+              config: Premise.state,
+              period_list: param.derived(function (store) {
+                    return PeriodList.deriveState(store);
+                  }),
+              unit: Tilia.lift(signal)
+            };
     });
-
-var period_list = PeriodList.computeState(main_store.config);
 
 export {
   Unit ,
   main_store ,
-  period_list ,
 }
 /* match Not a pure module */

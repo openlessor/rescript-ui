@@ -10,7 +10,7 @@ function str(prim) {
 
 var make = TiliaReact.leaf(function (props) {
       return JsxRuntime.jsx("div", {
-                  children: State.period_list.map(function (period) {
+                  children: State.main_store.period_list.map(function (period) {
                         return JsxRuntime.jsxs("label", {
                                     children: [
                                       JsxRuntime.jsx("input", {
