@@ -29,16 +29,16 @@ module SSR = {
   }
 }
 
+let premiseId = "a55351b1-1b78-4b6c-bd13-6859dc9ad410"
 let domExecutorConfig: Js.Nullable.t<Config.t> = %raw(
   "(typeof window !== 'undefined' ? window.__EXECUTOR_CONFIG__ ?? null : null)"
 )
 //let ctx = React.useContext(SSR.context)
-let initialExecutorConfig = switch Js.Nullable.toOption(domExecutorConfig) {
+let initialExecutorConfig: Config.t = switch Js.Nullable.toOption(domExecutorConfig) {
 | Some(config) => config
 | None => SSR.empty
 }
 // XXX: For now we hardcode the premise ID
-let premiseId = "a55351b1-1b78-4b6c-bd13-6859dc9ad410"
 let state = source(initialExecutorConfig, async (_prev, set) => {
   let config = await Config.fetch(premiseId)
   set(config)

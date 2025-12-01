@@ -168,7 +168,7 @@ var make = TiliaReact.leaf(function (props) {
                                                 })
                                           ],
                                           className: "my-auto " + (
-                                            unit === "Hour" ? "hidden" : ""
+                                            unit === "hour" ? "hidden" : ""
                                           )
                                         })
                                   ],

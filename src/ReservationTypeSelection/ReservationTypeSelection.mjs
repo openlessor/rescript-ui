@@ -9,59 +9,52 @@ function str(prim) {
 }
 
 var make = TiliaReact.leaf(function (props) {
-      return JsxRuntime.jsxs("div", {
-                  children: [
-                    JsxRuntime.jsxs("label", {
-                          children: [
-                            JsxRuntime.jsx("input", {
-                                  className: "m-1",
-                                  id: "type_hourly",
-                                  autoComplete: "off",
-                                  checked: State.main_store.unit === "Hour",
-                                  name: "type",
-                                  type: "radio",
-                                  value: "hour",
-                                  onChange: (function (e) {
-                                      var inputEl = e.currentTarget;
-                                      if (inputEl.checked === true) {
-                                        return State.Unit.set("Hour");
-                                      }
-                                      
-                                    })
-                                }),
-                            JsxRuntime.jsx("span", {
-                                  children: " Per Hour",
-                                  className: "p-1 pl-0"
-                                })
-                          ],
-                          htmlFor: "type_hourly"
-                        }),
-                    JsxRuntime.jsxs("label", {
-                          children: [
-                            JsxRuntime.jsx("input", {
-                                  className: "m-1",
-                                  id: "type_daily",
-                                  autoComplete: "off",
-                                  checked: State.main_store.unit === "Day",
-                                  name: "type",
-                                  type: "radio",
-                                  value: "date",
-                                  onChange: (function (e) {
-                                      var inputEl = e.currentTarget;
-                                      if (inputEl.checked === true) {
-                                        return State.Unit.set("Day");
-                                      }
-                                      
-                                    })
-                                }),
-                            JsxRuntime.jsx("span", {
-                                  children: " Per Day",
-                                  className: "p-1 pl-0"
-                                })
-                          ],
-                          htmlFor: "type_daily"
-                        })
-                  ],
+      return JsxRuntime.jsx("div", {
+                  children: State.period_list.map(function (period) {
+                        return JsxRuntime.jsxs("label", {
+                                    children: [
+                                      JsxRuntime.jsx("input", {
+                                            className: "m-1",
+                                            id: "type_" + period.unit,
+                                            autoComplete: "off",
+                                            checked: State.main_store.unit === period.unit,
+                                            name: "type",
+                                            type: "radio",
+                                            value: "hour",
+                                            onChange: (function (e) {
+                                                var inputEl = e.currentTarget;
+                                                if (inputEl.checked !== true) {
+                                                  return ;
+                                                }
+                                                var match = period.unit;
+                                                switch (match) {
+                                                  case "day" :
+                                                      return State.Unit.set("day");
+                                                  case "hour" :
+                                                      return State.Unit.set("hour");
+                                                  case "minute" :
+                                                      return State.Unit.set("minute");
+                                                  case "month" :
+                                                      return State.Unit.set("month");
+                                                  case "second" :
+                                                      return State.Unit.set("second");
+                                                  case "week" :
+                                                      return State.Unit.set("week");
+                                                  case "year" :
+                                                      return State.Unit.set("year");
+                                                  default:
+                                                    return State.Unit.set(State.Unit.defaultState);
+                                                }
+                                              })
+                                          }),
+                                      JsxRuntime.jsx("span", {
+                                            children: period.label,
+                                            className: "p-1 pl-0"
+                                          })
+                                    ],
+                                    htmlFor: "type_" + period.unit
+                                  }, period.unit);
+                      }),
                   className: "my-auto"
                 });
     });

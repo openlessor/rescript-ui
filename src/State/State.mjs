@@ -2,15 +2,16 @@
 
 import * as Tilia from "tilia/src/Tilia.mjs";
 import * as Premise from "./Premise.mjs";
+import * as PeriodList from "./PeriodList.mjs";
 
-var match = Tilia.signal("Hour");
+var match = Tilia.signal("hour");
 
 var signal = match[0];
 
 var Unit_set = match[1];
 
 var Unit = {
-  defaultState: "Hour",
+  defaultState: "hour",
   signal: signal,
   set: Unit_set
 };
@@ -20,8 +21,11 @@ var main_store = Tilia.tilia({
       unit: Tilia.lift(signal)
     });
 
+var period_list = PeriodList.computeState(main_store.config);
+
 export {
   Unit ,
   main_store ,
+  period_list ,
 }
 /* match Not a pure module */

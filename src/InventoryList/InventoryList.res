@@ -36,7 +36,7 @@ let make = leaf((
     Some(() => ())
   }, [openDate, closeDate])
   let heading = {
-    if unit != Unit.Hour && openDate != closeDate {
+    if unit != #hour && openDate != closeDate {
       // The open date and close date are at least 1 day apart
       "Showing " ++
       filterType ++

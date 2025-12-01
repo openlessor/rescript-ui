@@ -13,8 +13,10 @@ function InventoryItem(props) {
   var id = item.id;
   var matches = [];
   var matchCount = matches.length;
-  var quantity = matchCount > 0 ? String(matches.length) : "0";
-  var available = String(item.quantity - matchCount | 0);
+  if (matchCount > 0) {
+    String(matches.length);
+  }
+  String(item.quantity - matchCount | 0);
   return JsxRuntime.jsx("a", {
               children: JsxRuntime.jsxs("button", {
                     children: [
@@ -28,52 +30,24 @@ function InventoryItem(props) {
                                 }),
                             className: "rounded-sm border-2 shadow-sm m-0 p-0"
                           }),
-                      JsxRuntime.jsxs("div", {
-                            children: [
-                              JsxRuntime.jsxs("span", {
-                                    children: [
-                                      JsxRuntime.jsx("i", {
-                                            className: "light-icon-shopping-cart text-xl"
-                                          }),
-                                      JsxRuntime.jsx("span", {
-                                            children: quantity,
-                                            className: "text-[0.5rem]",
-                                            title: "Quantity in cart"
-                                          })
-                                    ],
-                                    className: "drop-shadow-sm"
-                                  }),
-                              JsxRuntime.jsxs("span", {
-                                    children: [
-                                      JsxRuntime.jsx("i", {
-                                            className: "light-icon-checks text-xl"
-                                          }),
-                                      JsxRuntime.jsx("span", {
-                                            children: available,
-                                            className: "text-[0.5rem]",
-                                            title: "Quantity available"
-                                          })
-                                    ],
-                                    className: "drop-shadow-sm"
-                                  })
-                            ],
+                      JsxRuntime.jsx("div", {
+                            children: JsxRuntime.jsx("h2", {
+                                  children: item.name,
+                                  className: "tracking-wider text-xs"
+                                }),
                             className: "flex flex-row justify-between w-full bg-gray-300 text-white shadow-sm"
                           }),
                       JsxRuntime.jsxs("div", {
                             children: [
-                              JsxRuntime.jsx("h2", {
-                                    children: item.name,
-                                    className: "text-xs"
-                                  }),
                               JsxRuntime.jsx("p", {
                                     children: item.description,
-                                    className: "text-xs m-2"
+                                    className: "text-xs text-left m-2"
                                   }),
                               JsxRuntime.jsx(Pricing.make, {
                                     period_list: item.period_list
                                   })
                             ],
-                            className: "flex flex-col text-align-center w-full bg-white/40 rounded-sm m-[1.5] justify-self-end"
+                            className: "flex flex-col w-full bg-white/40 rounded-sm m-[1.5] justify-self-end"
                           })
                     ],
                     className: "relative m-[1.5] flex flex-col  max-w-40"

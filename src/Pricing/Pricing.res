@@ -1,11 +1,12 @@
-type period_list = array<{
+type period = {
   "id": int,
   "unit": string,
   "label": string,
   "price": int,
   "max_value": int,
   "min_value": int,
-}>
+}
+type period_list = array<period>
 
 @react.component
 let make = (~period_list: period_list) => {

@@ -91,7 +91,7 @@ let make = leaf((~activeId: option<string>) => {
             selected={openDate}
           />
         </div>
-        <div className={`my-auto ${unit == Unit.Hour ? "hidden" : ""}`}>
+        <div className={`my-auto ${unit == #hour ? "hidden" : ""}`}>
           <span className="align-middle text-lg">
             {"Select your reservation end date: "->str}
           </span>

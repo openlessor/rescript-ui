@@ -46,7 +46,7 @@ var make = TiliaReact.leaf(function (props) {
             openDate$1,
             closeDate$1
           ]);
-      var heading = unit !== "Hour" && Caml_obj.notequal(openDate$1, closeDate$1) ? "Showing " + filterType + " equipment available from " + openDate$1.toLocaleDateString() + " to " + closeDate$1.toLocaleDateString() : "Showing " + filterType + " equipment available " + (
+      var heading = unit !== "hour" && Caml_obj.notequal(openDate$1, closeDate$1) ? "Showing " + filterType + " equipment available from " + openDate$1.toLocaleDateString() + " to " + closeDate$1.toLocaleDateString() : "Showing " + filterType + " equipment available " + (
           openDate$1.getTime() === today.getTime() ? "today" : openDate$1.toLocaleDateString()
         );
       return JsxRuntime.jsxs(Card.make, {
