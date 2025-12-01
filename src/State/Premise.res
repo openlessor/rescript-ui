@@ -43,4 +43,7 @@ let initialExecutorConfig: Config.t = switch Js.Nullable.toOption(domExecutorCon
 let state = source(initialExecutorConfig, async (_prev, set) => {
   let config = await Config.fetch(premiseId)
   set(config)
+  setInterval(() => {
+    Config.fetch(premiseId)->Promise.then(config => Promise.resolve(set(config)))->ignore
+  }, 5000)
 })

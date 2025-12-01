@@ -27,13 +27,20 @@ function Premise$SSR$Provider(props) {
             });
 }
 
+var premiseId = "a55351b1-1b78-4b6c-bd13-6859dc9ad410";
+
 var domExecutorConfig = ((typeof window !== 'undefined' ? window.__EXECUTOR_CONFIG__ ?? null : null));
 
 var initialExecutorConfig = (domExecutorConfig == null) ? empty : domExecutorConfig;
 
 var state = Tilia.source(initialExecutorConfig, (async function (_prev, set) {
-        var config = await $$fetch$1("a55351b1-1b78-4b6c-bd13-6859dc9ad410");
-        return set(config);
+        var config = await $$fetch$1(premiseId);
+        set(config);
+        return setInterval((function () {
+                      $$fetch$1(premiseId).then(function (config) {
+                            return Promise.resolve(set(config));
+                          });
+                    }), 5000);
       }));
 
 var Config = {
