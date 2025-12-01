@@ -134,46 +134,38 @@ var make = TiliaReact.leaf(function (props) {
                                   children: [
                                     JsxRuntime.jsx(Icon.Calendar.make, {
                                           size: 48,
-                                          className: "text-slate-400 mr-2 my-auto inline content-start"
+                                          className: "absolute left-0 top-0 bottom-0 my-auto text-slate-400"
                                         }),
-                                    JsxRuntime.jsxs("div", {
-                                          children: [
-                                            JsxRuntime.jsx("span", {
-                                                  children: "Select your reservation start date: ",
-                                                  className: "align-middle text-lg"
-                                                }),
-                                            JsxRuntime.jsx(DatePicker.make, {
-                                                  calendarClassName: "bg-white",
-                                                  className: "block outline-slate-400 outline-1 px-2",
-                                                  isOpen: false,
-                                                  minDate: today,
-                                                  onChange: updateOpenDate,
-                                                  selected: openDate
-                                                }),
-                                            JsxRuntime.jsxs("div", {
-                                                  children: [
-                                                    JsxRuntime.jsx("span", {
-                                                          children: "Select your reservation end date: ",
-                                                          className: "align-middle text-lg"
-                                                        }),
-                                                    JsxRuntime.jsx(DatePicker.make, {
-                                                          calendarClassName: "bg-white",
-                                                          className: "block align-end outline-slate-400 outline-1 px-2",
-                                                          isOpen: false,
-                                                          minDate: openDate,
-                                                          onChange: updateCloseDate,
-                                                          selected: closeDate
-                                                        })
-                                                  ],
-                                                  className: "grid grid-cols-subgrid col-span-full my-auto " + (
-                                                    unit === "hour" ? "hidden" : ""
-                                                  )
-                                                })
-                                          ],
-                                          className: "col-span-full grid grid-cols-subgrid"
+                                    JsxRuntime.jsx("span", {
+                                          children: "Select your reservation start date: ",
+                                          className: "align-middle text-lg pl-[56px]"
+                                        }),
+                                    JsxRuntime.jsx(DatePicker.make, {
+                                          calendarClassName: "bg-white",
+                                          className: "block outline-slate-400 outline-1 px-2",
+                                          isOpen: false,
+                                          minDate: today,
+                                          onChange: updateOpenDate,
+                                          selected: openDate
+                                        }),
+                                    JsxRuntime.jsx("span", {
+                                          children: "Select your reservation end date: ",
+                                          className: "align-middle text-lg pl-[56px] " + (
+                                            unit === "hour" ? "hidden" : ""
+                                          )
+                                        }),
+                                    JsxRuntime.jsx(DatePicker.make, {
+                                          calendarClassName: "bg-white",
+                                          className: "block align-end outline-slate-400 outline-1 px-2 " + (
+                                            unit === "hour" ? "hidden" : ""
+                                          ),
+                                          isOpen: false,
+                                          minDate: openDate,
+                                          onChange: updateCloseDate,
+                                          selected: closeDate
                                         })
                                   ],
-                                  className: "flex flex-row grid grid-cols-subgrid col-span-full"
+                                  className: "col-span-full grid grid-cols-subgrid relative"
                                 })
                           ],
                           className: "grid grid-cols-[auto_1fr] bg-white/20 gap-4 place-items-start items-center"
