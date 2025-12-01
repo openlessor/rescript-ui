@@ -7,13 +7,9 @@ module IntCmp = Belt.Id.MakeComparable({
 })
 
 @react.component
-let make = leaf((
-  ~openDate: option<Js.Date.t>=?,
-  ~closeDate: option<Js.Date.t>=?,
-  ~activeId: option<string>,
-) => {
+let make = leaf((~openDate: option<Js.Date.t>=?, ~closeDate: option<Js.Date.t>=?) => {
   let config: Premise.Config.t = main_store["config"]
-  let unit = main_store["unit"]
+  let unit: State.Unit.t = main_store["unit"]
   let items = config.inventory
   let filterType = "all"
   let now = Js.Date.make()
@@ -55,15 +51,12 @@ let make = leaf((
     </h1>
     <Card
       className="border-none shadow-none shadow-transparent m-0 p-0 place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4">
-      {Js.Array.map(
-        (item: InventoryItem.t) =>
-          <InventoryItem
-            key={Belt.Int.toString(item.id)}
-            item={item}
-            _active={activeId == Some(Belt.Int.toString(item.id))}
-          />,
-        items,
-      )->React.array}
+      {Js.Array.map((item: InventoryItem.t) => {
+        switch item.period_list->Array.find(pl => pl["unit"] == (unit :> string)) {
+        | Some(_) => <InventoryItem key={Belt.Int.toString(item.id)} item={item} />
+        | None => React.null
+        }
+      }, items)->React.array}
     </Card>
   </Card>
 })

@@ -29,20 +29,11 @@ function App(props) {
         return initialUrl;
       });
   var setUrl = match[1];
-  var url = match[0];
-  var match$1 = React.useState(function () {
-        return getActiveId(url);
-      });
-  var setActiveId = match$1[1];
-  var activeId = match$1[0];
   React.useEffect((function () {
           var watcherID = RescriptReactRouter.watchUrl(function (newUrl) {
                 console.log("URL changed to:", newUrl.path);
                 setUrl(function (param) {
                       return newUrl;
-                    });
-                setActiveId(function (param) {
-                      return getActiveId(newUrl);
                     });
               });
           return (function () {
@@ -50,11 +41,9 @@ function App(props) {
                   });
         }), []);
   var executorConfigValue = initialExecutorConfig !== undefined ? initialExecutorConfig : Premise.SSR.empty;
-  var match$2 = url.path;
+  var match$1 = match[0].path;
   var tmp;
-  tmp = match$2 && match$2.hd !== "item" ? JsxRuntime.jsx(ErrorView.make, {}) : JsxRuntime.jsx(Landing.make, {
-          activeId: activeId
-        });
+  tmp = match$1 && match$1.hd !== "item" ? JsxRuntime.jsx(ErrorView.make, {}) : JsxRuntime.jsx(Landing.make, {});
   return JsxRuntime.jsx(Premise.SSR.Provider.make, {
               value: executorConfigValue,
               children: tmp

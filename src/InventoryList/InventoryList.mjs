@@ -22,7 +22,6 @@ var IntCmp = Belt_Id.MakeComparable({
     });
 
 var make = TiliaReact.leaf(function (props) {
-      var activeId = props.activeId;
       var closeDate = props.closeDate;
       var openDate = props.openDate;
       var config = State.main_store.config;
@@ -53,10 +52,16 @@ var make = TiliaReact.leaf(function (props) {
                         }),
                     JsxRuntime.jsx(Card.make, {
                           children: Js_array.map((function (item) {
-                                  return JsxRuntime.jsx(InventoryItem.make, {
-                                              item: item,
-                                              _active: Caml_obj.equal(activeId, String(item.id))
-                                            }, String(item.id));
+                                  var match = item.period_list.find(function (pl) {
+                                        return pl.unit === unit;
+                                      });
+                                  if (match !== undefined) {
+                                    return JsxRuntime.jsx(InventoryItem.make, {
+                                                item: item
+                                              }, String(item.id));
+                                  } else {
+                                    return null;
+                                  }
                                 }), items),
                           className: "border-none shadow-none shadow-transparent m-0 p-0 place-content-start grid lg:grid-cols-8 grid-cols-4 gap-4"
                         })

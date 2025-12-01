@@ -15,7 +15,7 @@ let removeFromCart = (state: Cart.t, id) => {
 }
 
 @react.component
-let make = leaf((~activeId: option<string>) => {
+let make = leaf(() => {
   let unit = main_store["unit"]
   let now = Js.Date.make()
   let today = Js.Date.fromFloat(
@@ -112,7 +112,7 @@ let make = leaf((~activeId: option<string>) => {
     </Card>
     <Cart.StateContext.Provider value={state}>
       <Cart.DispatchContext.Provider value={dispatch}>
-        <InventoryList activeId={activeId} openDate={openDate} closeDate={closeDate} />
+        <InventoryList openDate={openDate} closeDate={closeDate} />
         <Cart count={cartCount} />
       </Cart.DispatchContext.Provider>
     </Cart.StateContext.Provider>

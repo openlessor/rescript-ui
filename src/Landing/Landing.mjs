@@ -175,8 +175,7 @@ var make = TiliaReact.leaf(function (props) {
                                 children: [
                                   JsxRuntime.jsx(InventoryList.make, {
                                         openDate: Caml_option.some(openDate),
-                                        closeDate: Caml_option.some(closeDate),
-                                        activeId: props.activeId
+                                        closeDate: Caml_option.some(closeDate)
                                       }),
                                   JsxRuntime.jsx(Cart.make, {
                                         count: cartCount

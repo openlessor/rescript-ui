@@ -13,7 +13,7 @@ type t = {
 external _parseJSON: string => t = "parse"
 
 @react.component
-let make = (~item: t, ~_active=?) => {
+let make = leaf((~item: t) => {
   let {id, name, description, period_list} = item
   let image = "https://placeholdr.ai/1ca27004-f6f9-413a-8dbf-6c088feabead/256/256"
   //let _dispatch = React.useContext(Cart.DispatchContext.context)
@@ -23,6 +23,8 @@ let make = (~item: t, ~_active=?) => {
   let matchCount = Js.Array.length(matches)
   let _quantity = matchCount > 0 ? Belt.Int.toString(Js.Array.length(matches)) : "0"
   let _available = Belt.Int.toString(item.quantity - matchCount)
+  // Find matching unit in period_list
+
   <a
     id={"item-" ++ Belt.Int.toString(id)}
     onClick={e => {
@@ -45,4 +47,4 @@ let make = (~item: t, ~_active=?) => {
       </div>
     </button>
   </a>
-}
+})
