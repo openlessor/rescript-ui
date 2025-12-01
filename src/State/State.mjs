@@ -19,9 +19,7 @@ var Unit = {
 var main_store = Tilia.carve(function (param) {
       return {
               config: Premise.state,
-              period_list: param.derived(function (store) {
-                    return PeriodList.deriveState(store);
-                  }),
+              period_list: param.derived(PeriodList.deriveState),
               unit: Tilia.lift(signal)
             };
     });

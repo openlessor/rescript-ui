@@ -7,7 +7,7 @@ module Unit = {
 let main_store = carve(({derived}) => {
   {
     "config": Premise.state,
-    "period_list": derived(store => PeriodList.deriveState(store)),
+    "period_list": derived(PeriodList.deriveState),
     "unit": Unit.signal->lift,
   }
 })

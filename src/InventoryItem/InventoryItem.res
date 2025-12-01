@@ -38,7 +38,7 @@ let make = leaf((~item: t) => {
         <img className="p-[1.5] w-40 h-40" src={image} style={Obj.magic({"width": "100%"})} />
       </div>
       <div className="flex flex-row justify-between w-full bg-gray-300 text-white shadow-sm">
-        <h2 className="tracking-wider text-xs"> {name->str} </h2>
+        <h2 className="tracking-wider text-xs px-2"> {name->str} </h2>
       </div>
       <div
         className="flex flex-col flex-grow flex-1 w-full bg-white/40 rounded-sm m-[1.5] justify-between items-end">

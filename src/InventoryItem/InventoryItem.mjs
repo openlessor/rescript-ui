@@ -35,7 +35,7 @@ var make = TiliaReact.leaf(function (props) {
                           JsxRuntime.jsx("div", {
                                 children: JsxRuntime.jsx("h2", {
                                       children: item.name,
-                                      className: "tracking-wider text-xs"
+                                      className: "tracking-wider text-xs px-2"
                                     }),
                                 className: "flex flex-row justify-between w-full bg-gray-300 text-white shadow-sm"
                               }),
