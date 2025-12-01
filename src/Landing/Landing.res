@@ -79,30 +79,38 @@ let make = leaf((~activeId: option<string>) => {
         {"Select your reservation type: "->str}
       </span>
       <ReservationTypeSelection />
-      <span className="align-middle text-lg">
+      <div className="flex flex-row col-span-1">
         <Icon.Calendar size={48} className="text-slate-400 mr-2 my-auto inline content-start" />
-        {"Select your reservation start date: "->str}
-      </span>
-      <DatePicker
-        minDate={today}
-        onChange={updateOpenDate}
-        isOpen={false}
-        className="block align-end outline-slate-400 outline-1 px-2"
-        calendarClassName="bg-white"
-        selected={openDate}
-      />
-      <div
-        className={`grid grid-cols-subgrid col-span-full my-auto ${unit == #hour ? "hidden" : ""}`}>
-        <span className="align-middle text-lg"> {"Select your reservation end date: "->str} </span>
-        <DatePicker
-          minDate={openDate}
-          selected={closeDate}
-          onChange={updateCloseDate}
-          isOpen={false}
-          className="block align-end outline-slate-400 outline-1 px-2"
-          calendarClassName="bg-white"
-          //selected={}
-        />
+        <div className="col-span-full grid grid-cols-subgrid">
+          <span className="align-middle text-lg">
+            {"Select your reservation start date: "->str}
+          </span>
+          <DatePicker
+            minDate={today}
+            onChange={updateOpenDate}
+            isOpen={false}
+            className="block outline-slate-400 outline-1 px-2"
+            calendarClassName="bg-white"
+            selected={openDate}
+          />
+          <div
+            className={`grid grid-cols-subgrid col-span-full my-auto ${unit == #hour
+                ? "hidden"
+                : ""}`}>
+            <span className="align-middle text-lg">
+              {"Select your reservation end date: "->str}
+            </span>
+            <DatePicker
+              minDate={openDate}
+              selected={closeDate}
+              onChange={updateCloseDate}
+              isOpen={false}
+              className="block align-end outline-slate-400 outline-1 px-2"
+              calendarClassName="bg-white"
+              //selected={}
+            />
+          </div>
+        </div>
       </div>
     </Card>
     <Cart.StateContext.Provider value={state}>
