@@ -79,7 +79,7 @@ let make = leaf((~activeId: option<string>) => {
         {"Select your reservation type: "->str}
       </span>
       <ReservationTypeSelection />
-      <div className="flex flex-row col-span-1">
+      <div className="flex flex-row grid grid-cols-subgrid col-span-full">
         <Icon.Calendar size={48} className="text-slate-400 mr-2 my-auto inline content-start" />
         <div className="col-span-full grid grid-cols-subgrid">
           <span className="align-middle text-lg">

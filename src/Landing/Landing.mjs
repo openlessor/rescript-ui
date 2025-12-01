@@ -173,7 +173,7 @@ var make = TiliaReact.leaf(function (props) {
                                           className: "col-span-full grid grid-cols-subgrid"
                                         })
                                   ],
-                                  className: "flex flex-row col-span-1"
+                                  className: "flex flex-row grid grid-cols-subgrid col-span-full"
                                 })
                           ],
                           className: "grid grid-cols-[auto_1fr] bg-white/20 gap-4 place-items-start items-center"
