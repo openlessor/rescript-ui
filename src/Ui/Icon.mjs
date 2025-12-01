@@ -7,6 +7,10 @@ var Calendar = {
   make: LucideReact.Calendar
 };
 
+var Clock = {
+  make: LucideReact.Clock
+};
+
 var MonitorCloud = {
   make: LucideReact.MonitorCloud
 };
@@ -38,6 +42,7 @@ JsxRuntime.jsx(Icon$IconButton, {
 
 export {
   Calendar ,
+  Clock ,
   MonitorCloud ,
   Cloud ,
   SearchIcon ,

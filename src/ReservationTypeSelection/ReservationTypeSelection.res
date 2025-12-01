@@ -6,7 +6,7 @@ let make = leaf(() => {
   <div className="my-auto">
     {period_list
     ->Js.Array2.map(period => {
-      <label key={period["unit"]} htmlFor={`type_${period["unit"]}`}>
+      <label className="block" key={period["unit"]} htmlFor={`type_${period["unit"]}`}>
         <input
           className="m-1"
           id={`type_${period["unit"]}`}

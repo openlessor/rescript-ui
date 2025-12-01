@@ -52,6 +52,7 @@ var make = TiliaReact.leaf(function (props) {
                                             className: "p-1 pl-0"
                                           })
                                     ],
+                                    className: "block",
                                     htmlFor: "type_" + period.unit
                                   }, period.unit);
                       }),

@@ -28,7 +28,7 @@ function InventoryItem(props) {
                                   },
                                   src: "https://placeholdr.ai/1ca27004-f6f9-413a-8dbf-6c088feabead/256/256"
                                 }),
-                            className: "rounded-sm border-2 shadow-sm m-0 p-0"
+                            className: "rounded-sm shadow-sm m-0 p-0"
                           }),
                       JsxRuntime.jsx("div", {
                             children: JsxRuntime.jsx("h2", {
@@ -47,12 +47,12 @@ function InventoryItem(props) {
                                     period_list: item.period_list
                                   })
                             ],
-                            className: "flex flex-col w-full bg-white/40 rounded-sm m-[1.5] justify-self-end"
+                            className: "flex flex-col flex-grow flex-1 w-full bg-white/40 rounded-sm m-[1.5] justify-between items-end"
                           })
                     ],
-                    className: "relative m-[1.5] flex flex-col  max-w-40"
+                    className: "relative m-[1.5] flex flex-1 flex-col flex-grow max-w-40"
                   }),
-              className: "block",
+              className: "flex flex-1 flex-col flex-grow border-2",
               id: "item-" + String(id),
               href: "/item/" + String(id),
               onClick: (function (e) {

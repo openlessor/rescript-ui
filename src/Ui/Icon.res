@@ -15,6 +15,11 @@ module Calendar: Icon = {
   external make: React.component<iconProps> = "Calendar"
 }
 
+module Clock: Icon = {
+  @module("lucide-react")
+  external make: React.component<iconProps> = "Clock"
+}
+
 module MonitorCloud: Icon = {
   @module("lucide-react")
   external make: React.component<iconProps> = "MonitorCloud"

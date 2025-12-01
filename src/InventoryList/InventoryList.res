@@ -28,13 +28,6 @@ let make = leaf((
   | Some(date) => date
   | _ => today
   }
-  React.useEffect(() => {
-    Js.Console.log("Open Date:")
-    Js.Console.log(openDate)
-    Js.Console.log("Close Date:")
-    Js.Console.log(closeDate)
-    Some(() => ())
-  }, [openDate, closeDate])
   let heading = {
     if unit != #hour && openDate != closeDate {
       // The open date and close date are at least 1 day apart
@@ -48,7 +41,7 @@ let make = leaf((
       "Showing " ++
       filterType ++
       " equipment available " ++
-      switch Js.Date.getTime(openDate) == Js.Date.getTime(today) {
+      switch openDate == today {
       | true => "today"
       | false => Js.Date.toLocaleDateString(openDate)
       }
@@ -57,7 +50,7 @@ let make = leaf((
 
   <Card className="m-0 p-0 bg-white/30 border-2 border-b-4 border-r-4 border-gray-200/60">
     <h1 className="block align-middle text-lg content-center">
-      <Icon.SearchIcon className="inline" />
+      <Icon.SearchIcon size={48} className="text-slate-400 mr-2 my-auto inline content-start" />
       <span className="align-middle"> {heading->str} </span>
     </h1>
     <Card

@@ -63,48 +63,46 @@ let make = leaf((~activeId: option<string>) => {
   let cartCount = Belt.Array.length(state.cart)
 
   <Container>
-    <Card className="bg-slate-200/40 border-slate-200/40 border-1 text-center">
+    <Card className="bg-slate-200/40 border-slate-200/40 border-1">
       <h1 className="text-xl">
         <span>
-          <Icon.MonitorCloud size={32} className="mr-2 my-auto inline content-start" />
+          <Icon.MonitorCloud
+            size={48} className="text-slate-400 mr-2 my-auto inline content-start"
+          />
           {"Cloud Hardware Rental"->str}
         </span>
       </h1>
     </Card>
-    <Card className="grid grid-cols-[auto_1fr] auto-cols-auto bg-white/20">
-      <span className="m-2 align-middle text-lg"> {"Select your reservation type: "->str} </span>
+    <Card className="grid grid-cols-[auto_1fr] bg-white/20 gap-4 place-items-start items-center">
+      <span className="align-middle text-lg">
+        <Icon.Clock className="text-slate-400 mr-2 my-auto inline content-start" size={48} />
+        {"Select your reservation type: "->str}
+      </span>
       <ReservationTypeSelection />
-    </Card>
-    <Card className="grid grid-cols-[auto_1fr] auto-cols-auto bg-white/20">
-      <Icon.Calendar size={48} className="mr-2 my-auto inline content-start" />
-      <div className="grid rows-auto-rows">
-        <div className="my-auto">
-          <span className="align-middle text-lg">
-            {"Select your reservation start date: "->str}
-          </span>
-          <DatePicker
-            minDate={today}
-            onChange={updateOpenDate}
-            isOpen={false}
-            className="block align-end outline-slate-400 outline-1 px-2"
-            calendarClassName="bg-white"
-            selected={openDate}
-          />
-        </div>
-        <div className={`my-auto ${unit == #hour ? "hidden" : ""}`}>
-          <span className="align-middle text-lg">
-            {"Select your reservation end date: "->str}
-          </span>
-          <DatePicker
-            minDate={openDate}
-            selected={closeDate}
-            onChange={updateCloseDate}
-            isOpen={false}
-            className="block align-end outline-slate-400 outline-1 px-2"
-            calendarClassName="bg-white"
-            //selected={}
-          />
-        </div>
+      <span className="align-middle text-lg">
+        <Icon.Calendar size={48} className="text-slate-400 mr-2 my-auto inline content-start" />
+        {"Select your reservation start date: "->str}
+      </span>
+      <DatePicker
+        minDate={today}
+        onChange={updateOpenDate}
+        isOpen={false}
+        className="block align-end outline-slate-400 outline-1 px-2"
+        calendarClassName="bg-white"
+        selected={openDate}
+      />
+      <div
+        className={`grid grid-cols-subgrid col-span-full my-auto ${unit == #hour ? "hidden" : ""}`}>
+        <span className="align-middle text-lg"> {"Select your reservation end date: "->str} </span>
+        <DatePicker
+          minDate={openDate}
+          selected={closeDate}
+          onChange={updateCloseDate}
+          isOpen={false}
+          className="block align-end outline-slate-400 outline-1 px-2"
+          calendarClassName="bg-white"
+          //selected={}
+        />
       </div>
     </Card>
     <Cart.StateContext.Provider value={state}>

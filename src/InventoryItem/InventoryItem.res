@@ -30,15 +30,16 @@ let make = (~item: t, ~_active=?) => {
       RescriptReactRouter.replace("/item/" ++ Belt.Int.toString(id))
     }}
     href={"/item/" ++ Belt.Int.toString(id)}
-    className="block">
-    <button className="relative m-[1.5] flex flex-col  max-w-40">
-      <div className="rounded-sm border-2 shadow-sm m-0 p-0">
+    className="flex flex-1 flex-col flex-grow border-2">
+    <button className="relative m-[1.5] flex flex-1 flex-col flex-grow max-w-40">
+      <div className="rounded-sm shadow-sm m-0 p-0">
         <img className="p-[1.5] w-40 h-40" src={image} style={Obj.magic({"width": "100%"})} />
       </div>
       <div className="flex flex-row justify-between w-full bg-gray-300 text-white shadow-sm">
         <h2 className="tracking-wider text-xs"> {name->str} </h2>
       </div>
-      <div className="flex flex-col w-full bg-white/40 rounded-sm m-[1.5] justify-self-end">
+      <div
+        className="flex flex-col flex-grow flex-1 w-full bg-white/40 rounded-sm m-[1.5] justify-between items-end">
         <p className="text-xs text-left m-2"> {description->str} </p>
         <Pricing period_list={period_list} />
       </div>

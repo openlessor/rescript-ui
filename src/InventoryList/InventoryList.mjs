@@ -3,7 +3,6 @@
 import * as Card from "../Ui/Card.mjs";
 import * as Icon from "../Ui/Icon.mjs";
 import * as State from "../State/State.mjs";
-import * as React from "react";
 import * as Belt_Id from "rescript/lib/es6/belt_Id.js";
 import * as Caml_obj from "rescript/lib/es6/caml_obj.js";
 import * as Js_array from "rescript/lib/es6/js_array.js";
@@ -34,27 +33,16 @@ var make = TiliaReact.leaf(function (props) {
       var today = new Date(now.setHours(0.0, 0.0, 0.0, 0.0));
       var openDate$1 = openDate !== undefined ? Caml_option.valFromOption(openDate) : today;
       var closeDate$1 = closeDate !== undefined ? Caml_option.valFromOption(closeDate) : today;
-      React.useEffect((function () {
-              console.log("Open Date:");
-              console.log(openDate$1);
-              console.log("Close Date:");
-              console.log(closeDate$1);
-              return (function () {
-                        
-                      });
-            }), [
-            openDate$1,
-            closeDate$1
-          ]);
       var heading = unit !== "hour" && Caml_obj.notequal(openDate$1, closeDate$1) ? "Showing " + filterType + " equipment available from " + openDate$1.toLocaleDateString() + " to " + closeDate$1.toLocaleDateString() : "Showing " + filterType + " equipment available " + (
-          openDate$1.getTime() === today.getTime() ? "today" : openDate$1.toLocaleDateString()
+          Caml_obj.equal(openDate$1, today) ? "today" : openDate$1.toLocaleDateString()
         );
       return JsxRuntime.jsxs(Card.make, {
                   children: [
                     JsxRuntime.jsxs("h1", {
                           children: [
                             JsxRuntime.jsx(Icon.SearchIcon.make, {
-                                  className: "inline"
+                                  size: 48,
+                                  className: "text-slate-400 mr-2 my-auto inline content-start"
                                 }),
                             JsxRuntime.jsx("span", {
                                   children: heading,
