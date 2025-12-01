@@ -15,7 +15,7 @@ external _parseJSON: string => t = "parse"
 @react.component
 let make = leaf((~item: t) => {
   let {id, name, description, period_list} = item
-  let image = "https://placeholdr.ai/1ca27004-f6f9-413a-8dbf-6c088feabead/256/256"
+  let image = "https://random.danielpetrica.com/api/random?" ++ id->Belt.Int.toString
   //let _dispatch = React.useContext(Cart.DispatchContext.context)
   //let cartState = React.useContext(Cart.StateContext.context)
   //let {path} = RescriptReactRouter.useUrl()
